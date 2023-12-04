@@ -64,7 +64,8 @@ class BinResource extends Resource
                         TextEntry::make('location.name'),
                         TextEntry::make('name'),
                         TextEntry::make('type'),
-                        ImageEntry::make('photo'),
+                        ImageEntry::make('photo')
+                            ->placeholder('-'),
                     ]),
             ]);
     }
