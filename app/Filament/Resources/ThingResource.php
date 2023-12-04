@@ -4,16 +4,23 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ThingResource\Pages\ManageThings;
 use App\Models\Thing;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ReplicateAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 class ThingResource extends Resource
 {
@@ -28,6 +35,10 @@ class ThingResource extends Resource
         return $form
             ->schema([
                 Select::make('location_id')
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->required(),
+                    ])
                     ->label('Location')
                     ->relationship(name: 'location', titleAttribute: 'name'),
                 Select::make('bin_id')
@@ -36,9 +47,8 @@ class ThingResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('photo')
-                    ->maxLength(255),
-                TextInput::make('categories'),
+                FileUpload::make('photo'),
+                TagsInput::make('categories'),
             ]);
     }
 
@@ -46,16 +56,18 @@ class ThingResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('location_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('bin_id')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('photo')
+                ImageColumn::make('photo')
                     ->searchable(),
+                TextColumn::make('location.name')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('bin.name')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('categories')
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -69,12 +81,42 @@ class ThingResource extends Resource
                 //
             ])
             ->actions([
-                EditAction::make(),
-                DeleteAction::make(),
+                ActionGroup::make([
+                    EditAction::make(),
+                    ReplicateAction::make(),
+                    DeleteAction::make(),
+                ]),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    BulkAction::make('change-bin')
+                        ->form([
+                            Select::make('bin_id')
+                                ->label('Bin')
+                                ->relationship(name: 'bin', titleAttribute: 'name'),
+                        ])
+                        ->action(fn (Collection $records, $data) => $records->each->update(['bin_id' => $data['bin_id']])),
+                    BulkAction::make('change-location')
+                        ->form([
+                            Select::make('location_id')
+                                ->createOptionForm([
+                                    TextInput::make('name')
+                                        ->required(),
+                                ])
+                                ->label('Location')
+                                ->relationship(name: 'location', titleAttribute: 'name'),
+                        ])
+                        ->action(fn (Collection $records, $data) => $records->each->update(['location_id' => $data['location_id']])),
+                    BulkAction::make('refresh-location')
+                        ->label('Refresh Location from Bin')
+                        ->action(fn (Collection $records, $data) => $records->each(function ($record) {
+                            if ($record->bin) {
+                                $record->update([
+                                    'location_id' => $record->bin->location_id,
+                                ]);
+                            }
+                        })),
                 ]),
             ]);
     }
