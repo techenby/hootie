@@ -73,16 +73,20 @@ class ThingResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 ImageColumn::make('photo')
                     ->simpleLightbox(),
                 TextColumn::make('location.name')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('bin.name')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('categories')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -109,6 +113,11 @@ class ThingResource extends Resource
             ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    BulkAction::make('change-categories')
+                        ->form([
+                            TagsInput::make('categories'),
+                        ])
+                        ->action(fn (Collection $records, $data) => $records->each->update(['categories' => $data['categories']])),
                     BulkAction::make('change-bin')
                         ->form([
                             Select::make('bin_id')
