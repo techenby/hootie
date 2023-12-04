@@ -24,6 +24,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class ThingResource extends Resource
 {
@@ -64,7 +65,14 @@ class ThingResource extends Resource
                     ->required()
                     ->maxLength(255),
                 FileUpload::make('photo'),
-                TagsInput::make('categories'),
+                TagsInput::make('categories')
+                    ->placeholder('Type categories then hit tab, comma or enter')
+                    ->splitKeys(['Tab', ',', 'Enter'])
+                    ->suggestions(Cache::remember(
+                        'categories-suggestions',
+                        60 * 60 * 6, // seconds * minutes * hours
+                        fn () => Thing::all()->flatMap->categories->unique()
+                    )),
             ]);
     }
 
@@ -116,7 +124,14 @@ class ThingResource extends Resource
                         ->action(fn (Collection $records, $data) => $records->each->update(['categories' => $data['categories']]))
                         ->deselectRecordsAfterCompletion()
                         ->form([
-                            TagsInput::make('categories'),
+                            TagsInput::make('categories')
+                                ->placeholder('Type categories then hit tab, comma or enter')
+                                ->splitKeys(['Tab', ',', 'Enter'])
+                                ->suggestions(Cache::remember(
+                                    'categories-suggestions',
+                                    60 * 60 * 6, // seconds * minutes * hours
+                                    fn () => Thing::all()->flatMap->categories->unique()
+                                )),
                         ])
                         ->label('Change Categories'),
                     BulkAction::make('change-bin')
