@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ThingResource\Pages\ManageThings;
 use App\Models\Thing;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -26,10 +27,12 @@ class ThingResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('location_id')
-                    ->numeric(),
-                TextInput::make('bin_id')
-                    ->numeric(),
+                Select::make('location_id')
+                    ->label('Location')
+                    ->relationship(name: 'location', titleAttribute: 'name'),
+                Select::make('bin_id')
+                    ->label('Bin')
+                    ->relationship(name: 'bin', titleAttribute: 'name'),
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),

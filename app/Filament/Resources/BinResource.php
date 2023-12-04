@@ -2,23 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BinResource\Pages;
 use App\Filament\Resources\BinResource\Pages\ManageBins;
-use App\Filament\Resources\BinResource\RelationManagers;
 use App\Models\Bin;
-use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BinResource extends Resource
 {
@@ -32,15 +30,19 @@ class BinResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('location_id')
-                    ->numeric(),
+                Select::make('location_id')
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->required(),
+                    ])
+                    ->label('Location')
+                    ->relationship(name: 'location', titleAttribute: 'name'),
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
                 TextInput::make('type')
                     ->maxLength(255),
-                TextInput::make('photo')
-                    ->maxLength(255),
+                FileUpload::make('photo'),
             ]);
     }
 
@@ -48,15 +50,16 @@ class BinResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('location_id')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('type')
-                    ->searchable(),
-                TextColumn::make('photo')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('location.name')
+                    ->sortable()
+                    ->sortable(),
+                ImageColumn::make('photo'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -70,8 +73,10 @@ class BinResource extends Resource
                 //
             ])
             ->actions([
-                EditAction::make(),
-                DeleteAction::make(),
+                ActionGroup::make([
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ]),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
