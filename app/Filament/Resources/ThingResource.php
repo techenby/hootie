@@ -112,20 +112,25 @@ class ThingResource extends Resource
             ])
             ->bulkActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
                     BulkAction::make('change-categories')
+                        ->action(fn (Collection $records, $data) => $records->each->update(['categories' => $data['categories']]))
+                        ->deselectRecordsAfterCompletion()
                         ->form([
                             TagsInput::make('categories'),
                         ])
-                        ->action(fn (Collection $records, $data) => $records->each->update(['categories' => $data['categories']])),
+                        ->label('Change Categories'),
                     BulkAction::make('change-bin')
+                        ->action(fn (Collection $records, $data) => $records->each->update(['bin_id' => $data['bin_id']]))
+                        ->deselectRecordsAfterCompletion()
                         ->form([
                             Select::make('bin_id')
                                 ->label('Bin')
                                 ->relationship(name: 'bin', titleAttribute: 'name'),
                         ])
-                        ->action(fn (Collection $records, $data) => $records->each->update(['bin_id' => $data['bin_id']])),
+                        ->label('Change Bin'),
                     BulkAction::make('change-location')
+                        ->action(fn (Collection $records, $data) => $records->each->update(['location_id' => $data['location_id']]))
+                        ->deselectRecordsAfterCompletion()
                         ->form([
                             Select::make('location_id')
                                 ->createOptionForm([
@@ -135,16 +140,18 @@ class ThingResource extends Resource
                                 ->label('Location')
                                 ->relationship(name: 'location', titleAttribute: 'name'),
                         ])
-                        ->action(fn (Collection $records, $data) => $records->each->update(['location_id' => $data['location_id']])),
+                        ->label('Change Location'),
                     BulkAction::make('refresh-location')
-                        ->label('Refresh Location from Bin')
                         ->action(fn (Collection $records, $data) => $records->each(function ($record) {
                             if ($record->bin) {
                                 $record->update([
                                     'location_id' => $record->bin->location_id,
                                 ]);
                             }
-                        })),
+                        }))
+                        ->label('Refresh Location from Bin')
+                        ->deselectRecordsAfterCompletion(),
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
