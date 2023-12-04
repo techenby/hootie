@@ -56,6 +56,7 @@ class AppPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->sidebarCollapsibleOnDesktop(true)
-            ->sidebarWidth('18em');
+            ->sidebarWidth('18em')
+            ->profile();
     }
 }
