@@ -3,12 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ThingResource\Pages\ManageThings;
+use App\Models\Bin;
 use App\Models\Thing;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\BulkAction;
@@ -34,6 +36,22 @@ class ThingResource extends Resource
     {
         return $form
             ->schema([
+                Select::make('bin_id')
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('location_id', Bin::find($state)->location_id))
+                    ->createOptionForm([
+                        Select::make('location_id')
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->required(),
+                            ])
+                            ->label('Location')
+                            ->relationship(name: 'location', titleAttribute: 'name'),
+                        TextInput::make('name')
+                            ->required(),
+                    ])
+                    ->label('Bin')
+                    ->live(debounce: 500)
+                    ->relationship(name: 'bin', titleAttribute: 'name'),
                 Select::make('location_id')
                     ->createOptionForm([
                         TextInput::make('name')
@@ -41,9 +59,6 @@ class ThingResource extends Resource
                     ])
                     ->label('Location')
                     ->relationship(name: 'location', titleAttribute: 'name'),
-                Select::make('bin_id')
-                    ->label('Bin')
-                    ->relationship(name: 'bin', titleAttribute: 'name'),
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
