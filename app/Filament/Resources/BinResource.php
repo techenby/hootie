@@ -83,7 +83,8 @@ class BinResource extends Resource
                 TextColumn::make('location.name')
                     ->sortable()
                     ->sortable(),
-                ImageColumn::make('photo'),
+                ImageColumn::make('photo')
+                    ->simpleLightbox(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

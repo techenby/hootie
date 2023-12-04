@@ -34,7 +34,8 @@ class ThingsRelationManager extends RelationManager
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                ImageColumn::make('photo'),
+                ImageColumn::make('photo')
+                    ->simpleLightbox(),
                 TextColumn::make('categories')
                     ->sortable(),
                 TextColumn::make('created_at')

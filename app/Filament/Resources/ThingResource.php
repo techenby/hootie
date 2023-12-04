@@ -75,7 +75,7 @@ class ThingResource extends Resource
                 TextColumn::make('name')
                     ->searchable(),
                 ImageColumn::make('photo')
-                    ->searchable(),
+                    ->simpleLightbox(),
                 TextColumn::make('location.name')
                     ->numeric()
                     ->sortable(),
