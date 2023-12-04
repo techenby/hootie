@@ -23,6 +23,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class BinResource extends Resource
@@ -92,7 +93,8 @@ class BinResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('location')
+                    ->relationship('location', 'name')
             ])
             ->actions([
                 ActionGroup::make([
