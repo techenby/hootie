@@ -65,7 +65,7 @@ class BinResource extends Resource
                         TextEntry::make('name'),
                         TextEntry::make('type'),
                         ImageEntry::make('photo'),
-                    ])
+                    ]),
             ]);
     }
 
@@ -94,7 +94,7 @@ class BinResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('location')
-                    ->relationship('location', 'name')
+                    ->relationship('location', 'name'),
             ])
             ->actions([
                 ActionGroup::make([
