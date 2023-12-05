@@ -50,7 +50,12 @@ class BinResource extends Resource
                     ->maxLength(255),
                 TextInput::make('type')
                     ->maxLength(255),
-                FileUpload::make('photo'),
+                    FileUpload::make('photo')
+                    ->image()
+                    ->imageResizeMode('cover')
+                    ->imageCropAspectRatio('16:9')
+                    ->imageResizeTargetWidth('1920')
+                    ->imageResizeTargetHeight('1080'),
             ]);
     }
 
