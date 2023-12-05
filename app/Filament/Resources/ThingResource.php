@@ -65,11 +65,7 @@ class ThingResource extends Resource
                     ->required()
                     ->maxLength(255),
                 FileUpload::make('photo')
-                    ->image()
-                    ->imageResizeMode('cover')
-                    ->imageCropAspectRatio('16:9')
-                    ->imageResizeTargetWidth('1920')
-                    ->imageResizeTargetHeight('1080'),
+                    ->image(),
                 TagsInput::make('categories')
                     ->placeholder('Type categories then hit tab, comma or enter')
                     ->splitKeys(['Tab', ',', 'Enter'])
