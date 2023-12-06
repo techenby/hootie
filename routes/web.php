@@ -7,12 +7,10 @@ use Illuminate\Support\Facades\Route;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| This app has a Filament `app` panel, check `app/Filament/Resources`
+| This app has Laravel Folio, check `resources/views/pages`
+|
+| You can run `php artisan route:list` and `php artisan folio:list`
+| to see all registered routes
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
