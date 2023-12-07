@@ -16,6 +16,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -25,6 +26,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 class BinResource extends Resource
 {
@@ -50,7 +52,7 @@ class BinResource extends Resource
                     ->maxLength(255),
                 TextInput::make('type')
                     ->maxLength(255),
-                    FileUpload::make('photo')
+                FileUpload::make('photo')
                     ->image()
                     ->imageResizeMode('cover')
                     ->imageCropAspectRatio('16:9')
@@ -112,6 +114,9 @@ class BinResource extends Resource
             ])
             ->bulkActions([
                 BulkActionGroup::make([
+                    BulkAction::make('print-qr-codes')
+                        ->action(fn (Collection $records) => redirect()->route('bins.print', ['ids' => $records->pluck('id')]))
+                        ->label('Print QR Codes'),
                     DeleteBulkAction::make(),
                 ]),
             ]);

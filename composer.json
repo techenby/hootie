@@ -11,9 +11,11 @@
         "php": "^8.1",
         "filament/filament": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.2",
+        "laravel/folio": "^1.1",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "solution-forest/filament-simplelightbox": "^0.0.4"
     },
     "require-dev": {
