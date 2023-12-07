@@ -115,7 +115,8 @@ class BinResource extends Resource
             ->bulkActions([
                 BulkActionGroup::make([
                     BulkAction::make('print-qr-codes')
-                        ->action(fn (Collection $records) => redirect()->route('bins.print', ['ids' => $records])),
+                        ->action(fn (Collection $records) => redirect()->route('bins.print', ['ids' => $records->pluck('id')]))
+                        ->label('Print QR Codes'),
                     DeleteBulkAction::make(),
                 ]),
             ]);

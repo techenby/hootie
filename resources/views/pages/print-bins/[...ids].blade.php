@@ -1,11 +1,18 @@
 <?php
 
 use App\Models\Bin;
+use Illuminate\View\View;
 use function Laravel\Folio\name;
+use function Laravel\Folio\render;
 
 name('bins.print');
 
-$bins = Bin::whereIn('id', $ids)->get();
+
+render(function (View $view, $ids) {
+    $bins = Bin::whereIn('id', $ids)->get();
+
+    return $view->with('bins', $bins);
+});
 
 ?>
 
@@ -17,5 +24,8 @@ $bins = Bin::whereIn('id', $ids)->get();
             <span class="text-lg">{{ $bin->name }}</span>
         </div>
         @endforeach
+    </div>
+    <div class="print:hidden fixed right-0 bottom-0 mb-4 py-2 px-6 rounded-l-full bg-blue-200">
+        Print this page then click the back button to go back to the app.
     </div>
 </x-layouts.print>
