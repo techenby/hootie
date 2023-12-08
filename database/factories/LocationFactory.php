@@ -9,15 +9,16 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class LocationFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'name' => match(rand(1,5)) {
+                1 => 'Kitchen',
+                2 => 'Basement',
+                3 => 'Office',
+                4 => 'Bedroom',
+                5 => 'Living Room',
+            },
         ];
     }
 }
