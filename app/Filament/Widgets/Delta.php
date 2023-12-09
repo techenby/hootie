@@ -25,7 +25,7 @@ class Delta extends Widget
         return [
             'jointPain' => $this->jointPain,
             'musclePain' => $this->musclePain,
-            'todayTemp' => $this->today['current']['temp'],
+            'todayTemp' => $this->todayTemp,
             'todayWeather' => $this->todayWeather,
             'yesterdayTemp' => $this->yesterdayTemp,
             'yesterdayWeather' => $this->yesterdayWeather,
@@ -60,24 +60,22 @@ class Delta extends Widget
 
     public function getTodayProperty()
     {
-        return Http::get('https://api.openweathermap.org/data/2.5/onecall', [
-            'lat' => $this->lat,
-            'lon' => $this->long,
-            'exclude' => 'hourly,minutely',
-            'appid' => env('WEATHER_APP_ID'),
-            'units' => 'imperial',
-        ])->json();
+        return $this->getWeatherDataFor(now()->timestamp);
+    }
+
+    public function getTodayTempProperty()
+    {
+        return $this->today['current']['temp'];
+    }
+
+    public function getTodayWeatherProperty()
+    {
+        return $this->today['current']['weather'][0];
     }
 
     public function getYesterdayProperty()
     {
-        return Http::get('https://api.openweathermap.org/data/2.5/onecall/timemachine', [
-            'lat' => $this->lat,
-            'lon' => $this->long,
-            'dt' => now()->subDay()->timestamp,
-            'appid' => env('WEATHER_APP_ID'),
-            'units' => 'imperial',
-        ])->json();
+        return $this->getWeatherDataFor(now()->subDay()->timestamp);
     }
 
     public function getYesterdayTempProperty()
@@ -103,5 +101,16 @@ class Delta extends Widget
         ]);
 
         $this->saved = true;
+    }
+
+    private function getWeatherDataFor($date)
+    {
+        return Http::get('https://api.openweathermap.org/data/2.5/onecall/timemachine', [
+            'lat' => $this->lat,
+            'lon' => $this->long,
+            'dt' => $date,
+            'appid' => env('WEATHER_APP_ID'),
+            'units' => 'imperial',
+        ])->json();
     }
 }
