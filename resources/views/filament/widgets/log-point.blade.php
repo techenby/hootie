@@ -11,7 +11,7 @@
 
             {{ $this->createAction() }}
 
-            <x-filament-actions::modals />
         </div>
     </x-filament::section>
+    <x-filament-actions::modals />
 </x-filament-widgets::widget>
