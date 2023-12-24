@@ -2,20 +2,15 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PointResource\Pages;
 use App\Filament\Resources\PointResource\Pages\CreatePoint;
 use App\Filament\Resources\PointResource\Pages\EditPoint;
 use App\Filament\Resources\PointResource\Pages\ListPoints;
-use App\Filament\Resources\PointResource\RelationManagers;
 use App\Models\Point;
-use Filament\Forms;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;

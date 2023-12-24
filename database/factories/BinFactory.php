@@ -12,7 +12,7 @@ class BinFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => match(rand(1,5)) {
+            'name' => match (rand(1, 5)) {
                 1 => 'Tech',
                 2 => 'Memories',
                 3 => 'Sport',

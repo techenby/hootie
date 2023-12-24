@@ -2,9 +2,6 @@
 
 namespace App\Filament\Widgets;
 
-use Filament\Actions\CreateAction;
-use Filament\Forms\Components\Radio;
-use Filament\Forms\Components\Textarea;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Carbon;
@@ -12,28 +9,15 @@ use Illuminate\Support\Facades\Http;
 
 class DeltaStats extends BaseWidget
 {
-    protected function getStats(): array
-    {
-        return [
-            Stat::make('Temperature Change', $this->todaysTemp . '°F')
-                ->description('from ' . $this->yesterdaysTemp  . '°F, ' . abs($this->todaysTemp - $this->yesterdaysTemp) . '°F change')
-                ->descriptionIcon(($this->todaysTemp > $this->yesterdaysTemp) ? 'heroicon-m-arrow-trending-up' : 'heroicon-m-arrow-trending-down'),
-            Stat::make('Precipitation Change', $this->todaysWeather['main'])
-                ->description('from ' . $this->yesterdaysWeather['main']),
-            Stat::make('Joint Pain', $this->jointPain ? 'Likely' : 'Not Likely'),
-            Stat::make('Muscle Pain', $this->musclePain ? 'Likely' : 'Not Likely'),
-        ];
-    }
-
     public function getJointPainProperty()
     {
         $jointPain = false;
 
-        if(abs($this->todaysTemp - $this->yesterdaysTemp) > 20) {
+        if (abs($this->todaysTemp - $this->yesterdaysTemp) > 20) {
             $jointPain = true;
         }
 
-        if($this->todaysWeather['id'] < 700 && $this->yesterdaysWeather['id'] > 700) {
+        if ($this->todaysWeather['id'] < 700 && $this->yesterdaysWeather['id'] > 700) {
             $jointPain = true;
         }
 
@@ -44,7 +28,7 @@ class DeltaStats extends BaseWidget
     {
         $musclePain = false;
 
-        if($this->todaysTemp < 35) {
+        if ($this->todaysTemp < 35) {
             $musclePain = true;
         }
 
@@ -79,6 +63,19 @@ class DeltaStats extends BaseWidget
     public function getYesterdaysWeatherProperty()
     {
         return $this->yesterday['current']['weather'][0];
+    }
+
+    protected function getStats(): array
+    {
+        return [
+            Stat::make('Temperature Change', $this->todaysTemp . '°F')
+                ->description('from ' . $this->yesterdaysTemp . '°F, ' . abs($this->todaysTemp - $this->yesterdaysTemp) . '°F change')
+                ->descriptionIcon(($this->todaysTemp > $this->yesterdaysTemp) ? 'heroicon-m-arrow-trending-up' : 'heroicon-m-arrow-trending-down'),
+            Stat::make('Precipitation Change', $this->todaysWeather['main'])
+                ->description('from ' . $this->yesterdaysWeather['main']),
+            Stat::make('Joint Pain', $this->jointPain ? 'Likely' : 'Not Likely'),
+            Stat::make('Muscle Pain', $this->musclePain ? 'Likely' : 'Not Likely'),
+        ];
     }
 
     private function getWeatherDataFor(Carbon $date): array

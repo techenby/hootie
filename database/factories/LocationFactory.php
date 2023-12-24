@@ -12,7 +12,7 @@ class LocationFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => match(rand(1,5)) {
+            'name' => match (rand(1, 5)) {
                 1 => 'Kitchen',
                 2 => 'Basement',
                 3 => 'Office',
