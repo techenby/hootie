@@ -6,8 +6,9 @@ use App\Filament\Resources\PointResource\Pages\EditPoint;
 use App\Models\Point;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
-use function Pest\Livewire\livewire;
+
 use function Pest\Laravel\{actingAs};
+use function Pest\Livewire\livewire;
 use function PHPUnit\Framework\assertEquals;
 
 it('can view all points', function () {
@@ -38,30 +39,30 @@ it('can view point edit form', function () {
 it('can store point', function () {
     Http::fake([
         '*' => Http::response([
-            "lat" => 41.6322,
-            "lon" => -88.212,
-            "timezone" => "America/Chicago",
-            "timezone_offset" => -21600,
-            "current" => [
-                "dt" => 1703441924,
-                "sunrise" => 1703423857,
-                "sunset" => 1703456815,
-                "temp" => 51.21,
-                "feels_like" => 50.59,
-                "pressure" => 1020,
-                "humidity" => 97,
-                "dew_point" => 50.38,
-                "uvi" => 1.2,
-                "clouds" => 100,
-                "visibility" => 3219,
-                "wind_speed" => 12.66,
-                "wind_deg" => 150,
-                "weather" => [
+            'lat' => 41.6322,
+            'lon' => -88.212,
+            'timezone' => 'America/Chicago',
+            'timezone_offset' => -21600,
+            'current' => [
+                'dt' => 1703441924,
+                'sunrise' => 1703423857,
+                'sunset' => 1703456815,
+                'temp' => 51.21,
+                'feels_like' => 50.59,
+                'pressure' => 1020,
+                'humidity' => 97,
+                'dew_point' => 50.38,
+                'uvi' => 1.2,
+                'clouds' => 100,
+                'visibility' => 3219,
+                'wind_speed' => 12.66,
+                'wind_deg' => 150,
+                'weather' => [
                     [
-                        "id" => 701,
-                        "main" => "Mist",
-                        "description" => "mist",
-                        "icon" => "50d",
+                        'id' => 701,
+                        'main' => 'Mist',
+                        'description' => 'mist',
+                        'icon' => '50d',
                     ],
                 ],
             ],
