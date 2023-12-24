@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\PointResource\Pages;
 
 use App\Filament\Resources\PointResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListPoints extends ListRecords
@@ -13,7 +13,7 @@ class ListPoints extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }
