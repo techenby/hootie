@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Http;
 
 class DeltaStats extends BaseWidget
 {
-    public $lat = '41.6322';
-    public $long = '-88.2120';
-
     protected function getStats(): array
     {
         return [
@@ -87,10 +84,10 @@ class DeltaStats extends BaseWidget
     private function getWeatherDataFor(Carbon $date): array
     {
         return Http::get('https://api.openweathermap.org/data/2.5/onecall/timemachine', [
-            'lat' => $this->lat,
-            'lon' => $this->long,
+            'lat' => config('services.openweather.lat'),
+            'lon' => config('services.openweather.long'),
             'dt' => $date->timestamp,
-            'appid' => env('WEATHER_APP_ID'),
+            'appid' => config('services.openweather.key'),
             'units' => 'imperial',
         ])->json();
     }
