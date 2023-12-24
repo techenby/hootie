@@ -1,3 +1,5 @@
+@use('App\Filament\Resources\PointResource')
+
 <x-filament-widgets::widget>
     <x-filament::section>
         <div class="flex items-center gap-x-3">
@@ -9,9 +11,12 @@
                 </h2>
             </div>
 
-            {{ $this->createAction() }}
-
+            <x-filament::button
+                :href="PointResource::getUrl('create')"
+                tag="a"
+            >
+                New point
+            </x-filament::button>
         </div>
     </x-filament::section>
-    <x-filament-actions::modals />
 </x-filament-widgets::widget>
