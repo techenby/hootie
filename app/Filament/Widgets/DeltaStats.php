@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Http;
 
 class DeltaStats extends BaseWidget
 {
+    protected static ?string $pollingInterval = '60s';
+
     public function getJointPainProperty()
     {
         $jointPain = false;
