@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'openweather' => [
+        'key' => env('WEATHER_APP_ID'),
+        'lat' => '41.6322',
+        'long' => '-88.2120',
+    ],
+
 ];

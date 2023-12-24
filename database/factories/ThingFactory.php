@@ -17,7 +17,7 @@ class ThingFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => match(rand(1,5)) {
+            'name' => match (rand(1, 5)) {
                 1 => 'Microphone',
                 2 => 'Cookie Cutter',
                 3 => 'Controller',
