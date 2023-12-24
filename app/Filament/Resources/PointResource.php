@@ -10,6 +10,7 @@ use App\Filament\Resources\PointResource\RelationManagers;
 use App\Models\Point;
 use Filament\Forms;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -33,33 +34,30 @@ class PointResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('yesterday_temp')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('today_temp')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('yesterday_weather')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('today_weather')
-                    ->required()
-                    ->maxLength(255),
-                Radio::make('joint')
-                    ->options([
-                        'none' => 'None',
-                        'mild' => 'Mild',
-                        'moderate' => 'Moderate',
-                        'severe' => 'Severe',
+                Section::make('How are you feeling?')
+                    ->columns(2)
+                    ->schema([
+                        Radio::make('joint_pain')
+                            ->label('Joint Pain')
+                            ->options([
+                                'none' => 'None',
+                                'mild' => 'Mild',
+                                'moderate' => 'Moderate',
+                                'severe' => 'Severe',
+                            ]),
+                        Radio::make('muscle_pain')
+                            ->label('Muscle Pain')
+                            ->options([
+                                'none' => 'None',
+                                'mild' => 'Mild',
+                                'moderate' => 'Moderate',
+                                'severe' => 'Severe',
+                            ]),
+                        Radio::make('took_meds')
+                            ->boolean()
+                            ->label('Did you take your meds yesterday?'),
+                        Textarea::make('notes'),
                     ]),
-                Radio::make('muscle')
-                    ->options([
-                        'none' => 'None',
-                        'mild' => 'Mild',
-                        'moderate' => 'Moderate',
-                        'severe' => 'Severe',
-                    ]),
-                Textarea::make('notes'),
             ]);
     }
 
