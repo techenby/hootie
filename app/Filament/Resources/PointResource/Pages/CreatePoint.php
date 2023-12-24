@@ -19,9 +19,9 @@ class CreatePoint extends CreateRecord
 
         $stats = [
             'today_temp' => $today['current']['temp'],
-            'today_weather' => $today['current']['weather'][0]['main'],
+            'today_weather' => $today['current']['weather'][0]['description'],
             'yesterday_temp' => $yesterday['current']['temp'],
-            'yesterday_weather' => $yesterday['current']['weather'][0]['main'],
+            'yesterday_weather' => $yesterday['current']['weather'][0]['description'],
         ];
 
         return static::getModel()::create([...$data, ...$stats]);
