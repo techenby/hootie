@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,14 @@ class PointFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::factory(),
+            'yesterday_temp' => '50',
+            'today_temp' => '30',
+            'yesterday_weather' => 'sunny',
+            'today_weather' => 'cloudy',
+            'joint_pain' => 'moderate',
+            'muscle_pain' => 'moderate',
+            'took_meds' => true,
         ];
     }
 }
