@@ -9,6 +9,8 @@ use App\Filament\Resources\PointResource\Pages\ListPoints;
 use App\Filament\Resources\PointResource\RelationManagers;
 use App\Models\Point;
 use Filament\Forms;
+use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -43,12 +45,21 @@ class PointResource extends Resource
                 TextInput::make('today_weather')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('joint_pain')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('muscle_pain')
-                    ->required()
-                    ->maxLength(255),
+                Radio::make('joint')
+                    ->options([
+                        'none' => 'None',
+                        'mild' => 'Mild',
+                        'moderate' => 'Moderate',
+                        'severe' => 'Severe',
+                    ]),
+                Radio::make('muscle')
+                    ->options([
+                        'none' => 'None',
+                        'mild' => 'Mild',
+                        'moderate' => 'Moderate',
+                        'severe' => 'Severe',
+                    ]),
+                Textarea::make('notes'),
             ]);
     }
 
