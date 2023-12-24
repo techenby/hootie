@@ -39,7 +39,8 @@ class PointResource extends Resource
                                 'mild' => 'Mild',
                                 'moderate' => 'Moderate',
                                 'severe' => 'Severe',
-                            ]),
+                            ])
+                            ->required(),
                         Radio::make('muscle_pain')
                             ->label('Muscle Pain')
                             ->options([
@@ -47,10 +48,12 @@ class PointResource extends Resource
                                 'mild' => 'Mild',
                                 'moderate' => 'Moderate',
                                 'severe' => 'Severe',
-                            ]),
+                            ])
+                            ->required(),
                         Radio::make('took_meds')
                             ->boolean()
-                            ->label('Did you take your meds yesterday?'),
+                            ->label('Did you take your meds yesterday?')
+                            ->required(),
                         Textarea::make('notes'),
                     ]),
             ]);
