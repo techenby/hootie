@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('today_weather');
             $table->string('joint_pain');
             $table->string('muscle_pain');
+            $table->boolean('took_meds');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }
