@@ -63,6 +63,8 @@ class PointResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('creator.name')
+                    ->sortable(),
                 TextColumn::make('yesterday_temp')
                     ->numeric()
                     ->sortable(),
