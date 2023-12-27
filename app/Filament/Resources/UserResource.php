@@ -41,11 +41,12 @@ class UserResource extends Resource
                 TextInput::make('email')
                     ->email()
                     ->required()
-                    ->maxLength(255),
-                DateTimePicker::make('email_verified_at'),
+                    ->maxLength(255)
+                    ->unique(table: User::class, ignoreRecord: true),
                 TextInput::make('password')
                     ->password()
                     ->required()
+                    ->hidden(fn ($record) => $record !== null)
                     ->maxLength(255),
             ]);
     }
@@ -88,6 +89,7 @@ class UserResource extends Resource
                     })
                     ->form([
                         TextInput::make('password')
+                            ->confirmed()
                             ->password()
                             ->required()
                             ->maxLength(255),
