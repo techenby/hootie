@@ -3,6 +3,7 @@
 use App\Filament\Resources\PointResource;
 use App\Filament\Resources\PointResource\Pages\CreatePoint;
 use App\Filament\Resources\PointResource\Pages\EditPoint;
+use App\Filament\Widgets\DeltaStats;
 use App\Models\Point;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
@@ -132,4 +133,248 @@ it('can edit point', function () {
         assertEquals(true, $point->took_meds);
         assertEquals('no notes', $point->notes);
     });
+});
+
+it('can show todays stats', function () {
+    Http::fake([
+        '*' => Http::sequence()
+            ->push([
+                'current' => [
+                    'temp' => 55,
+                    'weather' => [
+                        [
+                            'id' => 800,
+                            'main' => 'Clear',
+                            'description' => 'clear',
+                        ],
+                    ],
+                ],
+            ])
+            ->push([
+                'current' => [
+                    'temp' => 30,
+                    'weather' => [
+                        [
+                            'id' => 701,
+                            'main' => 'Rain',
+                            'description' => 'rain',
+                            'icon' => '50d',
+                        ],
+                    ],
+                ],
+            ]),
+    ]);
+
+    livewire(DeltaStats::class)
+        ->assertSeeInOrder([
+            'Temperature Change',
+            '55°F',
+            'from 30°F',
+            '25°F change'
+        ])
+        ->assertSeeInOrder([
+            'Precipitation Change',
+            'Clear',
+            'from Rain',
+        ])
+        ->assertSet('jointPain', true)
+        ->assertSet('musclePain', false);
+});
+
+it('shows joint pain likely if temp changed more than 20 degrees', function () {
+    Http::fake([
+        '*' => Http::sequence()
+            ->push([
+                'current' => [
+                    'temp' => 50,
+                    'weather' => [
+                        [
+                            'id' => 800,
+                            'main' => 'Clear',
+                            'description' => 'clear',
+                        ],
+                    ],
+                ],
+            ])
+            ->push([
+                'current' => [
+                    'temp' => 20,
+                    'weather' => [
+                        [
+                            'id' => 800,
+                            'main' => 'Clear',
+                            'description' => 'clear',
+                        ],
+                    ],
+                ],
+            ]),
+    ]);
+
+    livewire(DeltaStats::class)
+        ->assertSet('jointPain', true);
+});
+
+it('shows joint pain not likely if temp changed less than 20 degrees', function () {
+    Http::fake([
+        '*' => Http::sequence()
+            ->push([
+                'current' => [
+                    'temp' => 50,
+                    'weather' => [
+                        [
+                            'id' => 800,
+                            'main' => 'Clear',
+                            'description' => 'clear',
+                        ],
+                    ],
+                ],
+            ])
+            ->push([
+                'current' => [
+                    'temp' => 50,
+                    'weather' => [
+                        [
+                            'id' => 800,
+                            'main' => 'Clear',
+                            'description' => 'clear',
+                        ],
+                    ],
+                ],
+            ]),
+    ]);
+
+    livewire(DeltaStats::class)
+        ->assertSet('jointPain', false);
+});
+
+it('shows joint pain likely if weather was rainy yesterday and not today', function () {
+    Http::fake([
+        '*' => Http::sequence()
+            ->push([
+                'current' => [
+                    'temp' => 50,
+                    'weather' => [
+                        [
+                            'id' => 531,
+                            'main' => 'Rain',
+                            'description' => 'rain',
+                        ],
+                    ],
+                ],
+            ])
+            ->push([
+                'current' => [
+                    'temp' => 50,
+                    'weather' => [
+                        [
+                            'id' => 800,
+                            'main' => 'Clear',
+                            'description' => 'clear',
+                        ],
+                    ],
+                ],
+            ]),
+    ]);
+
+    livewire(DeltaStats::class)
+        ->assertSet('jointPain', true);
+});
+
+it('shows joint pain not likely if weather was not rainy yesterday and not today', function () {
+    Http::fake([
+        '*' => Http::sequence()
+            ->push([
+                'current' => [
+                    'temp' => 50,
+                    'weather' => [
+                        [
+                            'id' => 800,
+                            'main' => 'Clear',
+                            'description' => 'clear',
+                        ],
+                    ],
+                ],
+            ])
+            ->push([
+                'current' => [
+                    'temp' => 50,
+                    'weather' => [
+                        [
+                            'id' => 800,
+                            'main' => 'Clear',
+                            'description' => 'clear',
+                        ],
+                    ],
+                ],
+            ]),
+    ]);
+
+    livewire(DeltaStats::class)
+        ->assertSet('jointPain', false);
+});
+
+it('shows muscle pain likely if today is colder than 35', function () {
+    Http::fake([
+        '*' => Http::sequence()
+            ->push([
+                'current' => [
+                    'temp' => 32,
+                    'weather' => [
+                        [
+                            'id' => 800,
+                            'main' => 'Clear',
+                            'description' => 'clear',
+                        ],
+                    ],
+                ],
+            ])
+            ->push([
+                'current' => [
+                    'temp' => 50,
+                    'weather' => [
+                        [
+                            'id' => 800,
+                            'main' => 'Clear',
+                            'description' => 'clear',
+                        ],
+                    ],
+                ],
+            ]),
+    ]);
+
+    livewire(DeltaStats::class)
+        ->assertSet('musclePain', true);
+});
+
+it('shows muscle pain not likely if today is warmer than 35', function () {
+    Http::fake([
+        '*' => Http::sequence()
+            ->push([
+                'current' => [
+                    'temp' => 35,
+                    'weather' => [
+                        [
+                            'id' => 800,
+                            'main' => 'Clear',
+                            'description' => 'clear',
+                        ],
+                    ],
+                ],
+            ])
+            ->push([
+                'current' => [
+                    'temp' => 50,
+                    'weather' => [
+                        [
+                            'id' => 800,
+                            'main' => 'Clear',
+                            'description' => 'clear',
+                        ],
+                    ],
+                ],
+            ]),
+    ]);
+
+    livewire(DeltaStats::class)
+        ->assertSet('musclePain', false);
 });
