@@ -2,7 +2,6 @@
 
 use App\Filament\Resources\UserResource;
 use App\Filament\Resources\UserResource\Pages\ManageUsers;
-use App\Models\Point;
 use App\Models\User;
 use Filament\Actions\CreateAction;
 use Filament\Actions\EditAction;
@@ -116,7 +115,7 @@ it('can update password', function () {
     livewire(ManageUsers::class)
         ->callTableAction('change_password', $user, data: [
             'password' => 'password',
-            'password_confirmation' => 'password'
+            'password_confirmation' => 'password',
         ])
         ->assertHasNoActionErrors();
 
@@ -129,7 +128,7 @@ it('cannot update password when confirmation does not match', function () {
     livewire(ManageUsers::class)
         ->callTableAction('change_password', $user, data: [
             'password' => 'password',
-            'password_confirmation' => 'secret-password'
+            'password_confirmation' => 'secret-password',
         ])
         ->assertHasActionErrors();
 });
