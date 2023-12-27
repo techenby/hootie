@@ -7,11 +7,11 @@ use function Laravel\Folio\render;
 
 name('bins.print');
 
-
 render(function (View $view, $ids) {
     $bins = Bin::whereIn('id', $ids)->get();
 
-    return $view->with('bins', $bins);
+    return $view->with('bins', $bins)
+        ->with('quantity', request()->query('quantity', 1));
 });
 
 ?>
@@ -19,10 +19,12 @@ render(function (View $view, $ids) {
 <x-layouts.print>
     <div class="grid grid-cols-4">
         @foreach ($bins as $bin)
-        <div class="p-4 text-center">
-            <span class="flex items-center justify-center mb-4">{!! $bin->qrcode !!}</span>
-            <span class="text-lg">{{ $bin->name }}</span>
-        </div>
+        @for ($i = 0; $i < $quantity; $i++)
+            <div class="p-4 text-center">
+                <span class="flex items-center justify-center mb-4">{!! $bin->qrcode !!}</span>
+                <span class="text-lg">{{ $bin->name }}</span>
+            </div>
+        @endfor
         @endforeach
     </div>
     <div class="print:hidden fixed right-0 bottom-0 mb-4 py-2 px-6 rounded-l-full bg-blue-200">
