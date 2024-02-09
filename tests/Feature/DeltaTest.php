@@ -170,7 +170,7 @@ it('can show todays stats', function () {
             'Temperature Change',
             '55°F',
             'from 30°F',
-            '25°F change'
+            '25°F change',
         ])
         ->assertSeeInOrder([
             'Precipitation Change',
