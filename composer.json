@@ -15,6 +15,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "omar-haris/filament-timezone-field": "^1.0",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "solution-forest/filament-simplelightbox": "^0.0.4",
         "spatie/laravel-dashboard": "^3.0"

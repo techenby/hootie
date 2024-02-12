@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18d1242ea099d70ff2f5e9a4c8762bec",
+    "content-hash": "a8fe7513e3ebee954a0caee3184fa885",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -4131,6 +4131,83 @@
                 }
             ],
             "time": "2023-02-08T01:06:31+00:00"
+        },
+        {
+            "name": "omar-haris/filament-timezone-field",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/omar-haris/filament-timezone-field.git",
+                "reference": "55468118a6a5ebf969be61bfefc643a9a10477e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/omar-haris/filament-timezone-field/zipball/55468118a6a5ebf969be61bfefc643a9a10477e3",
+                "reference": "55468118a6a5ebf969be61bfefc643a9a10477e3",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0-stable",
+                "illuminate/contracts": "^10.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.14.0"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.0.1",
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.8",
+                "orchestra/testbench": "^8.8",
+                "pestphp/pest": "^2.20",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "OmarHaris\\FilamentTimezoneField\\FilamentTimezoneFieldServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentTimezoneField": "OmarHaris\\FilamentTimezoneField\\Facades\\FilamentTimezoneField"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OmarHaris\\FilamentTimezoneField\\": "src/",
+                    "OmarHaris\\FilamentTimezoneField\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Omar Haris",
+                    "email": "omar@haris.family",
+                    "homepage": "https://www.linkedin.com/in/omarkha",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel Filament component that enables users to choose a specific time zone.",
+            "homepage": "https://github.com/omar-haris/filament-timezone-field",
+            "keywords": [
+                "filament",
+                "filament-timezone-field",
+                "filamentphp",
+                "laravel",
+                "omar-haris",
+                "timezone"
+            ],
+            "support": {
+                "issues": "https://github.com/omar-haris/filament-timezone-field/issues",
+                "source": "https://github.com/omar-haris/filament-timezone-field/tree/v1.0.1"
+            },
+            "time": "2023-12-14T20:57:06+00:00"
         },
         {
             "name": "openspout/openspout",
