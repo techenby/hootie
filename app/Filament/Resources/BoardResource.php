@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BoardResource\Pages;
+use App\Http\Integrations\OpenWeather\OpenWeatherConnector;
+use App\Http\Integrations\OpenWeather\Requests\ZipRequest;
 use App\Models\Board;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
@@ -10,6 +12,8 @@ use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -30,6 +34,9 @@ class BoardResource extends Resource
             ->columns(1)
             ->schema([
                 TextInput::make('name'),
+                Timezone::make('timezone')
+                    ->searchable()
+                    ->required(),
                 Builder::make('tiles')
                     ->collapsible()
                     ->blocks([
@@ -39,9 +46,6 @@ class BoardResource extends Resource
                                 TextInput::make('type')
                                     ->default('blade')
                                     ->hidden(),
-                                Timezone::make('timezone')
-                                    ->searchable()
-                                    ->required(),
                                 Fieldset::make('Size')
                                     ->schema([
                                         TextInput::make('height')
@@ -60,9 +64,6 @@ class BoardResource extends Resource
                                 TextInput::make('type')
                                     ->default('blade')
                                     ->hidden(),
-                                Timezone::make('timezone')
-                                    ->searchable()
-                                    ->required(),
                                 Fieldset::make('Size')
                                     ->schema([
                                         TextInput::make('height')
@@ -100,9 +101,6 @@ class BoardResource extends Resource
                                 TextInput::make('type')
                                     ->default('livewire')
                                     ->hidden(),
-                                Timezone::make('timezone')
-                                    ->searchable()
-                                    ->required(),
                                 Fieldset::make('Size')
                                     ->schema([
                                         TextInput::make('height')
@@ -158,7 +156,25 @@ class BoardResource extends Resource
                                             ->default(1),
                                     ]),
                             ]),
-                    ]),
+                    ])
+                    ->dehydrateStateUsing(function (array $state, Get $get) {
+                        foreach($state as $index => $tile) {
+                            if ($tile['type'] === 'weather') {
+                                $weather = new OpenWeatherConnector(config("services.openweather.key"));
+                                $request = new ZipRequest($tile['data']['zip']);
+
+                                $response = $weather->send($request)->json();
+
+                                $tile['data'] = array_merge($tile['data'], $response);
+
+                                $state[$index] = $tile;
+                            } else if (in_array($tile['type'], ['clock-analog', 'clock-digital', 'monthly-calendar', 'agenda-calendar'])) {
+                                $state[$index]['data']['timezone'] = $get('timezone');
+                            }
+                        }
+
+                        return $state;
+                    }),
             ]);
     }
 
