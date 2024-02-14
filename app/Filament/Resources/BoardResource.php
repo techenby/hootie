@@ -6,7 +6,6 @@ use App\Filament\Resources\BoardResource\Pages;
 use App\Models\Board;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
-use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
@@ -82,11 +81,7 @@ class BoardResource extends Resource
                                 TextInput::make('type')
                                     ->default('livewire')
                                     ->hidden(),
-                                Fieldset::make('Location')
-                                    ->schema([
-                                        TextInput::make('latitude'),
-                                        TextInput::make('longitude'),
-                                ]),
+                                TextInput::make('zip'),
                                 Fieldset::make('Size')
                                     ->schema([
                                         TextInput::make('height')
@@ -105,8 +100,6 @@ class BoardResource extends Resource
                                 TextInput::make('type')
                                     ->default('livewire')
                                     ->hidden(),
-                                ColorPicker::make('highlight')
-                                    ->hex(),
                                 Timezone::make('timezone')
                                     ->searchable()
                                     ->required(),

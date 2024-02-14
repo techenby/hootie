@@ -50,10 +50,6 @@ new class extends Component {
     @endif
 
     @foreach (range(1, $daysInMonth) as $date)
-    <div class="text-center {{ $date === $todaysDate ? 'rounded-md' : '' }}"
-        @style([
-            'background-color: ' . $data['highlight'] => $date === $todaysDate,
-        ])
-    >{{ $date }}</div>
+    <div class="text-center {{ $date === $todaysDate ? 'rounded-md border border-gray-500' : '' }}">{{ $date }}</div>
     @endforeach
 </x-tile>
