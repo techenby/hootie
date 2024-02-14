@@ -13,7 +13,6 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
-use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -158,9 +157,9 @@ class BoardResource extends Resource
                             ]),
                     ])
                     ->dehydrateStateUsing(function (array $state, Get $get) {
-                        foreach($state as $index => $tile) {
+                        foreach ($state as $index => $tile) {
                             if ($tile['type'] === 'weather') {
-                                $weather = new OpenWeatherConnector(config("services.openweather.key"));
+                                $weather = new OpenWeatherConnector(config('services.openweather.key'));
                                 $request = new ZipRequest($tile['data']['zip']);
 
                                 $response = $weather->send($request)->json();
@@ -168,7 +167,7 @@ class BoardResource extends Resource
                                 $tile['data'] = array_merge($tile['data'], $response);
 
                                 $state[$index] = $tile;
-                            } else if (in_array($tile['type'], ['clock-analog', 'clock-digital', 'monthly-calendar', 'agenda-calendar'])) {
+                            } elseif (in_array($tile['type'], ['clock-analog', 'clock-digital', 'monthly-calendar', 'agenda-calendar'])) {
                                 $state[$index]['data']['timezone'] = $get('timezone');
                             }
                         }
