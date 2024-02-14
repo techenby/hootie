@@ -23,14 +23,4 @@ class OpenWeatherConnector extends Connector
     {
         return new QueryAuthenticator('appid', $this->token);
     }
-
-    protected function defaultHeaders(): array
-    {
-        return [];
-    }
-
-    protected function defaultConfig(): array
-    {
-        return [];
-    }
 }
