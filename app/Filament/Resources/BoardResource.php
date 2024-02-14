@@ -6,7 +6,9 @@ use App\Filament\Resources\BoardResource\Pages;
 use App\Models\Board;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -30,16 +32,20 @@ class BoardResource extends Resource
             ->schema([
                 TextInput::make('name'),
                 Builder::make('tiles')
+                    ->collapsible()
                     ->blocks([
                         Block::make('clock-analog')
                             ->label('Analog Clock')
                             ->schema([
+                                TextInput::make('type')
+                                    ->default('blade')
+                                    ->hidden(),
                                 Timezone::make('timezone')
                                     ->searchable()
                                     ->required(),
                                 Fieldset::make('Size')
                                     ->schema([
-                                        TextInput::make('length')
+                                        TextInput::make('height')
                                             ->required()
                                             ->numeric()
                                             ->default(1),
@@ -52,12 +58,15 @@ class BoardResource extends Resource
                         Block::make('clock-digital')
                             ->label('Digital Clock')
                             ->schema([
+                                TextInput::make('type')
+                                    ->default('blade')
+                                    ->hidden(),
                                 Timezone::make('timezone')
                                     ->searchable()
                                     ->required(),
                                 Fieldset::make('Size')
                                     ->schema([
-                                        TextInput::make('length')
+                                        TextInput::make('height')
                                             ->required()
                                             ->numeric()
                                             ->default(1),
@@ -67,7 +76,96 @@ class BoardResource extends Resource
                                             ->default(1),
                                     ]),
                             ]),
-                    ])
+                        Block::make('weather')
+                            ->label('Weather')
+                            ->schema([
+                                TextInput::make('type')
+                                    ->default('livewire')
+                                    ->hidden(),
+                                Fieldset::make('Location')
+                                    ->schema([
+                                        TextInput::make('latitude'),
+                                        TextInput::make('longitude'),
+                                ]),
+                                Fieldset::make('Size')
+                                    ->schema([
+                                        TextInput::make('height')
+                                            ->required()
+                                            ->numeric()
+                                            ->default(1),
+                                        TextInput::make('width')
+                                            ->required()
+                                            ->numeric()
+                                            ->default(1),
+                                    ]),
+                            ]),
+                        Block::make('monthly-calendar')
+                            ->label('Monthly Calendar')
+                            ->schema([
+                                TextInput::make('type')
+                                    ->default('livewire')
+                                    ->hidden(),
+                                ColorPicker::make('highlight')
+                                    ->hex(),
+                                Timezone::make('timezone')
+                                    ->searchable()
+                                    ->required(),
+                                Fieldset::make('Size')
+                                    ->schema([
+                                        TextInput::make('height')
+                                            ->required()
+                                            ->numeric()
+                                            ->default(1),
+                                        TextInput::make('width')
+                                            ->required()
+                                            ->numeric()
+                                            ->default(1),
+                                    ]),
+                            ]),
+                        Block::make('agenda-calendar')
+                            ->label('Agenda Calendar')
+                            ->schema([
+                                TextInput::make('name')
+                                    ->required(),
+                                Repeater::make('emails')
+                                    ->simple(
+                                        TextInput::make('email')
+                                            ->email()
+                                            ->required(),
+                                    ),
+                                Fieldset::make('Size')
+                                    ->schema([
+                                        TextInput::make('height')
+                                            ->required()
+                                            ->numeric()
+                                            ->default(1),
+                                        TextInput::make('width')
+                                            ->required()
+                                            ->numeric()
+                                            ->default(1),
+                                    ]),
+                            ]),
+                        Block::make('github')
+                            ->label('GitHub')
+                            ->schema([
+                                Repeater::make('repos')
+                                    ->simple(
+                                        TextInput::make('repo')
+                                            ->required(),
+                                    ),
+                                Fieldset::make('Size')
+                                    ->schema([
+                                        TextInput::make('height')
+                                            ->required()
+                                            ->numeric()
+                                            ->default(1),
+                                        TextInput::make('width')
+                                            ->required()
+                                            ->numeric()
+                                            ->default(1),
+                                    ]),
+                            ]),
+                    ]),
             ]);
     }
 
