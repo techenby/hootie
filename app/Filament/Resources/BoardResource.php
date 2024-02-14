@@ -115,6 +115,9 @@ class BoardResource extends Resource
                         Block::make('agenda-calendar')
                             ->label('Agenda Calendar')
                             ->schema([
+                                TextInput::make('type')
+                                    ->default('livewire')
+                                    ->hidden(),
                                 TextInput::make('name')
                                     ->required(),
                                 Repeater::make('emails')

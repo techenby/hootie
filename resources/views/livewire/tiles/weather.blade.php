@@ -27,8 +27,8 @@ new class extends Component {
     <div class="w-full mt-2 flex justify-between">
         <div class="text-5xl">{{ round($weather['current']['temp']) }}°</div>
         <div>
-            <p>H: {{ round($weather['daily'][0]['temp']['max']) }}°</p>
-            <p>L: {{ round($weather['daily'][0]['temp']['min']) }}°</p>
+            <p class="text-right">H: {{ round($weather['daily'][0]['temp']['max']) }}°</p>
+            <p class="text-right">L: {{ round($weather['daily'][0]['temp']['min']) }}°</p>
         </div>
     </div>
 
