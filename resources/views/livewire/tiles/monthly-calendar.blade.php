@@ -49,8 +49,8 @@ new class extends Component {
     <div class="col-span-{{ $dayOfWeek }}"></div>
     @endif
 
-    @foreach(range(1, $daysInMonth) as $date)
-    <div class="text-center {{ $date === $todaysDate ? 'rounded-md' : ''}}"
+    @foreach (range(1, $daysInMonth) as $date)
+    <div class="text-center {{ $date === $todaysDate ? 'rounded-md' : '' }}"
         @style([
             'background-color: ' . $data['highlight'] => $date === $todaysDate,
         ])

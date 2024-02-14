@@ -15,7 +15,7 @@
 
 .outer-clock-face {
     position: relative;
-    background: theme('colors.gray.100');
+    background: theme('colors.white');
     overflow: hidden;
     width: 100%;
     height: 100%;
@@ -75,7 +75,7 @@
     left: 10%;
     width: 80%;
     height: 80%;
-    background: theme('colors.gray.100');
+    background: theme('colors.white');
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
     border-radius: 100%;

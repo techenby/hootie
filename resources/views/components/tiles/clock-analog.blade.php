@@ -1,4 +1,3 @@
-
 <x-tile class="flex items-center justify-center" :width="$data['width']" :height="$data['height']">
     <div class="clock">
         <div class="outer-clock-face">
