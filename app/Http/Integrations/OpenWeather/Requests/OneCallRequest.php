@@ -9,9 +9,13 @@ class OneCallRequest extends Request
 {
     protected Method $method = Method::GET;
 
+    public function __construct(public float $lat, public float $lon)
+    {
+    }
+
     public function resolveEndpoint(): string
     {
-        return '/onecall';
+        return '/data/3.0/onecall';
     }
 
     protected function defaultQuery(): array
@@ -19,6 +23,8 @@ class OneCallRequest extends Request
         return [
             'units' => 'imperial',
             'exclude' => 'hourly,minutely',
+            'lat' => $this->lat,
+            'lon' => $this->lon,
         ];
     }
 }

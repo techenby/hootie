@@ -1,0 +1,21 @@
+@if ($id === 800)
+    @include('components.icons.sun')
+@elseif ($id === 801)
+    @include('components.icons.sun-behind-small-cloud')
+@elseif ($id === 802)
+    @include('components.icons.sun-behind-large-cloud')
+@elseif ($id === 803 || $id === 804)
+    @include('components.icons.cloud')
+@elseif (Illuminate\Support\Str::startsWith($id, 3))
+    @include('components.icons.cloud-with-rain')
+@elseif (Illuminate\Support\Str::startsWith($id, 5))
+    @include('components.icons.sun-behind-rain-cloud')
+@elseif (Illuminate\Support\Str::startsWith($id, 2))
+    @include('components.icons.cloud-with-lightning-and-rain')
+@elseif (Illuminate\Support\Str::startsWith($id, 6))
+    @include('components.icons.snow-flake')
+@elseif (Illuminate\Support\Str::startsWith($id, 7))
+    @include('components.icons.fog')
+@else
+    {{-- error --}}
+@endif
