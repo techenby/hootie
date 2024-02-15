@@ -21,7 +21,8 @@
         "saloonphp/saloon": "^3.0",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "solution-forest/filament-simplelightbox": "^0.0.4",
-        "spatie/laravel-dashboard": "^3.0"
+        "spatie/laravel-dashboard": "^3.0",
+        "spatie/laravel-google-calendar": "^3.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

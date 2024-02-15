@@ -38,6 +38,7 @@ class BoardResource extends Resource
                     ->collapsible()
                     ->blocks([
                         Block::make('clock-analog')
+                            ->columns(2)
                             ->label('Analog Clock')
                             ->schema([
                                 Timezone::make('timezone')
@@ -59,6 +60,7 @@ class BoardResource extends Resource
                                     ]),
                             ]),
                         Block::make('clock-digital')
+                            ->columns(2)
                             ->label('Digital Clock')
                             ->schema([
                                 Timezone::make('timezone')
@@ -80,6 +82,7 @@ class BoardResource extends Resource
                                     ]),
                             ]),
                         Block::make('weather')
+                            ->columns(2)
                             ->label('Weather')
                             ->schema([
                                 TextInput::make('type')
@@ -98,7 +101,30 @@ class BoardResource extends Resource
                                             ->default(1),
                                     ]),
                             ]),
+                        Block::make('barometric')
+                            ->columns(2)
+                            ->label('Barometric Pressure')
+                            ->schema([
+                                TextInput::make('type')
+                                    ->default('livewire')
+                                    ->hidden(),
+                                TextInput::make('zip'),
+                                Timezone::make('timezone')
+                                    ->searchable(),
+                                Fieldset::make('Size')
+                                    ->schema([
+                                        TextInput::make('height')
+                                            ->required()
+                                            ->numeric()
+                                            ->default(1),
+                                        TextInput::make('width')
+                                            ->required()
+                                            ->numeric()
+                                            ->default(1),
+                                    ]),
+                            ]),
                         Block::make('monthly-calendar')
+                            ->columns(2)
                             ->label('Monthly Calendar')
                             ->schema([
                                 Timezone::make('timezone')
@@ -120,6 +146,7 @@ class BoardResource extends Resource
                                     ]),
                             ]),
                         Block::make('agenda-calendar')
+                            ->columns(2)
                             ->label('Agenda Calendar')
                             ->schema([
                                 TextInput::make('type')
@@ -146,6 +173,7 @@ class BoardResource extends Resource
                                     ]),
                             ]),
                         Block::make('github')
+                            ->columns(2)
                             ->label('GitHub')
                             ->schema([
                                 Repeater::make('repos')
@@ -166,9 +194,9 @@ class BoardResource extends Resource
                                     ]),
                             ]),
                     ])
-                    ->dehydrateStateUsing(function (array $state, Get $get) {
+                    ->dehydrateStateUsing(function (array $state) {
                         foreach ($state as $index => $tile) {
-                            if ($tile['type'] === 'weather') {
+                            if ($tile['type'] === 'weather' || $tile['type'] === 'barometric') {
                                 $weather = new OpenWeatherConnector(config('services.openweather.key'));
                                 $request = new ZipRequest($tile['data']['zip']);
 

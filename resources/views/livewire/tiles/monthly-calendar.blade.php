@@ -8,7 +8,7 @@ new class extends Component {
 
     public function mount()
     {
-        $this->carbon = now();
+        $this->carbon = now($this->data['timezone']);
     }
 
     public function with(): array
