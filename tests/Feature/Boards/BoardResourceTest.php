@@ -8,9 +8,8 @@ use App\Models\User;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
-use function Pest\Livewire\livewire;
-
 use function Pest\Laravel\{actingAs};
+use function Pest\Livewire\livewire;
 
 it('can view all boards', function () {
     $user = User::factory()->create();
@@ -45,8 +44,8 @@ it('adding a weather tile looks up zip', function () {
                         'zip' => 60544,
                         'type' => 'livewire',
                         'width' => 1,
-                        'height' => 1
-                    ]
+                        'height' => 1,
+                    ],
                 ],
             ],
         ])

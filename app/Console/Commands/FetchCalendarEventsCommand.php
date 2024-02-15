@@ -17,15 +17,15 @@ class FetchCalendarEventsCommand extends Command
     {
         $this->info('Fetching calendar events...');
 
-        $calendarIds = Board::where("tiles", "LIKE", "%agenda-calendar%")
+        $calendarIds = Board::where('tiles', 'LIKE', '%agenda-calendar%')
             ->get()
-            ->pluck("tiles")
+            ->pluck('tiles')
             ->map(
-                fn($tiles) => collect($tiles)
-                ->filter(fn($tile) => $tile["type"] === "agenda-calendar")
-                ->pluck("data.emails")
-                ->flatten()
-                ->unique()
+                fn ($tiles) => collect($tiles)
+                    ->filter(fn ($tile) => $tile['type'] === 'agenda-calendar')
+                    ->pluck('data.emails')
+                    ->flatten()
+                    ->unique()
             )
             ->flatten()
             ->unique();
