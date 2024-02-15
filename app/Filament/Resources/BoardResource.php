@@ -2,7 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BoardResource\Pages;
+use App\Filament\Resources\BoardResource\Pages\EditBoard;
+use App\Filament\Resources\BoardResource\Pages\ListBoards;
 use App\Http\Integrations\OpenWeather\OpenWeatherConnector;
 use App\Http\Integrations\OpenWeather\Requests\ZipRequest;
 use App\Models\Board;
@@ -203,8 +204,8 @@ class BoardResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBoards::route('/'),
-            'edit' => Pages\EditBoard::route('/{record}/edit'),
+            'index' => ListBoards::route('/'),
+            'edit' => EditBoard::route('/{record}/edit'),
         ];
     }
 }

@@ -31,7 +31,7 @@ class FetchCalendarEventsCommand extends Command
             ->unique();
 
         foreach ($calendarIds as $calendarId) {
-            dd($calendarId);
+            // dd($calendarId);
             // $events = collect(Event::get(null, null, [], $calendarId))
             //     ->map(function (Event $event) {
             //         $sortDate = $event->getSortDate();
