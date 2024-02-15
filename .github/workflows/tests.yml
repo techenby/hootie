@@ -26,3 +26,6 @@ jobs:
 
       - name: Run tests
         run: php artisan test
+        env:
+            APP_ENV: testing
+            WEATHER_APP_ID: ${{ secrets.WEATHER_APP_ID }}
