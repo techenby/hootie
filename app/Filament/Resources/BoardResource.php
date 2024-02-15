@@ -33,15 +33,15 @@ class BoardResource extends Resource
             ->columns(1)
             ->schema([
                 TextInput::make('name'),
-                Timezone::make('timezone')
-                    ->searchable()
-                    ->required(),
                 Builder::make('tiles')
                     ->collapsible()
                     ->blocks([
                         Block::make('clock-analog')
                             ->label('Analog Clock')
                             ->schema([
+                                Timezone::make('timezone')
+                                    ->searchable()
+                                    ->required(),
                                 TextInput::make('type')
                                     ->default('blade')
                                     ->hidden(),
@@ -60,6 +60,9 @@ class BoardResource extends Resource
                         Block::make('clock-digital')
                             ->label('Digital Clock')
                             ->schema([
+                                Timezone::make('timezone')
+                                    ->searchable()
+                                    ->required(),
                                 TextInput::make('type')
                                     ->default('blade')
                                     ->hidden(),
@@ -97,6 +100,9 @@ class BoardResource extends Resource
                         Block::make('monthly-calendar')
                             ->label('Monthly Calendar')
                             ->schema([
+                                Timezone::make('timezone')
+                                    ->searchable()
+                                    ->required(),
                                 TextInput::make('type')
                                     ->default('livewire')
                                     ->hidden(),
@@ -170,8 +176,6 @@ class BoardResource extends Resource
                                 $tile['data'] = array_merge($tile['data'], $response);
 
                                 $state[$index] = $tile;
-                            } elseif (in_array($tile['type'], ['clock-analog', 'clock-digital', 'monthly-calendar', 'agenda-calendar'])) {
-                                $state[$index]['data']['timezone'] = $get('timezone');
                             }
                         }
 

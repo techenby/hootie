@@ -4,12 +4,8 @@
 
 
 .clock {
-    width: 90%;
-    height: 90%;
-    position: relative;
-    padding: .5rem;
+    @apply aspect-square h-4/5 relative p-2 rounded-full;
     border: 4px solid theme('colors.gray.300');
-    border-radius: 50%;
     margin: 50px auto;
 }
 
