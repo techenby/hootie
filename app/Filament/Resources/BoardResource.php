@@ -35,10 +35,31 @@ class BoardResource extends Resource
             ->schema([
                 TextInput::make('name'),
                 Builder::make('tiles')
+                    ->addActionLabel('Add a new tile')
+                    ->blockNumbers(false)
+                    ->collapsed()
                     ->collapsible()
+                    ->cloneable()
+                    ->dehydrateStateUsing(function (array $state) {
+                        foreach ($state as $index => $tile) {
+                            if ($tile['type'] === 'weather' || $tile['type'] === 'barometric') {
+                                $weather = new OpenWeatherConnector(config('services.openweather.key'));
+                                $request = new ZipRequest($tile['data']['zip']);
+
+                                $response = $weather->send($request)->json();
+
+                                $tile['data'] = array_merge($tile['data'], $response);
+
+                                $state[$index] = $tile;
+                            }
+                        }
+
+                        return $state;
+                    })
                     ->blocks([
                         Block::make('clock-analog')
                             ->columns(2)
+                            ->icon('heroicon-m-clock')
                             ->label('Analog Clock')
                             ->schema([
                                 Timezone::make('timezone')
@@ -61,6 +82,7 @@ class BoardResource extends Resource
                             ]),
                         Block::make('clock-digital')
                             ->columns(2)
+                            ->icon('heroicon-m-clock')
                             ->label('Digital Clock')
                             ->schema([
                                 Timezone::make('timezone')
@@ -83,6 +105,7 @@ class BoardResource extends Resource
                             ]),
                         Block::make('weather')
                             ->columns(2)
+                            ->icon('heroicon-m-cloud')
                             ->label('Weather')
                             ->schema([
                                 TextInput::make('type')
@@ -103,6 +126,7 @@ class BoardResource extends Resource
                             ]),
                         Block::make('barometric')
                             ->columns(2)
+                            ->icon('heroicon-m-cloud')
                             ->label('Barometric Pressure')
                             ->schema([
                                 TextInput::make('type')
@@ -125,6 +149,7 @@ class BoardResource extends Resource
                             ]),
                         Block::make('monthly-calendar')
                             ->columns(2)
+                            ->icon('heroicon-m-calendar')
                             ->label('Monthly Calendar')
                             ->schema([
                                 Timezone::make('timezone')
@@ -147,6 +172,7 @@ class BoardResource extends Resource
                             ]),
                         Block::make('agenda-calendar')
                             ->columns(2)
+                            ->icon('heroicon-m-calendar')
                             ->label('Agenda Calendar')
                             ->schema([
                                 TextInput::make('type')
@@ -193,23 +219,7 @@ class BoardResource extends Resource
                                             ->default(1),
                                     ]),
                             ]),
-                    ])
-                    ->dehydrateStateUsing(function (array $state) {
-                        foreach ($state as $index => $tile) {
-                            if ($tile['type'] === 'weather' || $tile['type'] === 'barometric') {
-                                $weather = new OpenWeatherConnector(config('services.openweather.key'));
-                                $request = new ZipRequest($tile['data']['zip']);
-
-                                $response = $weather->send($request)->json();
-
-                                $tile['data'] = array_merge($tile['data'], $response);
-
-                                $state[$index] = $tile;
-                            }
-                        }
-
-                        return $state;
-                    }),
+                    ]),
             ]);
     }
 
