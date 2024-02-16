@@ -64,20 +64,8 @@ class BoardResource extends Resource
                                 Timezone::make('timezone')
                                     ->searchable()
                                     ->required(),
-                                TextInput::make('type')
-                                    ->default('blade')
-                                    ->hidden(),
-                                Fieldset::make('Size')
-                                    ->schema([
-                                        TextInput::make('height')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                        TextInput::make('width')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                    ]),
+                                self::getTypeField('blade'),
+                                self::getSizeFieldset(),
                             ]),
                         Block::make('clock-digital')
                             ->columns(2)
@@ -87,64 +75,28 @@ class BoardResource extends Resource
                                 Timezone::make('timezone')
                                     ->searchable()
                                     ->required(),
-                                TextInput::make('type')
-                                    ->default('blade')
-                                    ->hidden(),
-                                Fieldset::make('Size')
-                                    ->schema([
-                                        TextInput::make('height')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                        TextInput::make('width')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                    ]),
+                                self::getSizeFieldset(),
+                                self::getTypeField('blade'),
                             ]),
                         Block::make('weather')
                             ->columns(2)
                             ->icon('heroicon-m-cloud')
                             ->label('Weather')
                             ->schema([
-                                TextInput::make('type')
-                                    ->default('livewire')
-                                    ->hidden(),
                                 TextInput::make('zip'),
-                                Fieldset::make('Size')
-                                    ->schema([
-                                        TextInput::make('height')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                        TextInput::make('width')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                    ]),
+                                self::getSizeFieldset(),
+                                self::getTypeField('livewire'),
                             ]),
                         Block::make('barometric')
                             ->columns(2)
                             ->icon('heroicon-m-cloud')
                             ->label('Barometric Pressure')
                             ->schema([
-                                TextInput::make('type')
-                                    ->default('livewire')
-                                    ->hidden(),
                                 TextInput::make('zip'),
                                 Timezone::make('timezone')
                                     ->searchable(),
-                                Fieldset::make('Size')
-                                    ->schema([
-                                        TextInput::make('height')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                        TextInput::make('width')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                    ]),
+                                self::getSizeFieldset(),
+                                self::getTypeField('livewire'),
                             ]),
                         Block::make('monthly-calendar')
                             ->columns(2)
@@ -154,29 +106,14 @@ class BoardResource extends Resource
                                 Timezone::make('timezone')
                                     ->searchable()
                                     ->required(),
-                                TextInput::make('type')
-                                    ->default('livewire')
-                                    ->hidden(),
-                                Fieldset::make('Size')
-                                    ->schema([
-                                        TextInput::make('height')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                        TextInput::make('width')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                    ]),
+                                self::getSizeFieldset(),
+                                self::getTypeField('livewire'),
                             ]),
                         Block::make('agenda-calendar')
                             ->columns(2)
                             ->icon('heroicon-m-calendar')
                             ->label('Agenda Calendar')
                             ->schema([
-                                TextInput::make('type')
-                                    ->default('livewire')
-                                    ->hidden(),
                                 TextInput::make('name')
                                     ->required(),
                                 Repeater::make('emails')
@@ -185,17 +122,8 @@ class BoardResource extends Resource
                                             ->email()
                                             ->required(),
                                     ),
-                                Fieldset::make('Size')
-                                    ->schema([
-                                        TextInput::make('height')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                        TextInput::make('width')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                    ]),
+                                self::getSizeFieldset(),
+                                self::getTypeField('livewire'),
                             ]),
                         Block::make('github')
                             ->columns(2)
@@ -206,17 +134,8 @@ class BoardResource extends Resource
                                         TextInput::make('repo')
                                             ->required(),
                                     ),
-                                Fieldset::make('Size')
-                                    ->schema([
-                                        TextInput::make('height')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                        TextInput::make('width')
-                                            ->required()
-                                            ->numeric()
-                                            ->default(1),
-                                    ]),
+                                self::getSizeFieldset(),
+                                self::getTypeField('blade'),
                             ]),
                     ]),
             ]);
@@ -244,5 +163,27 @@ class BoardResource extends Resource
             'index' => ListBoards::route('/'),
             'edit' => EditBoard::route('/{record}/edit'),
         ];
+    }
+
+    private static function getSizeFieldset()
+    {
+        return Fieldset::make('Size')
+            ->schema([
+                TextInput::make('height')
+                    ->required()
+                    ->numeric()
+                    ->default(1),
+                TextInput::make('width')
+                    ->required()
+                    ->numeric()
+                    ->default(1),
+            ]);
+    }
+
+    private static function getTypeField($type)
+    {
+        return TextInput::make('type')
+            ->default($type)
+            ->hidden();
     }
 }
