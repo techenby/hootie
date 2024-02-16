@@ -35,7 +35,7 @@ new class extends Component {
     <p>{{ $data['name'] }}</p>
 
     <dl class="divide-y divide-gray-100">
-        @foreach($pressures as $pressure)
+        @foreach ($pressures as $pressure)
         <div class="py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt class="text-sm font-medium leading-6 text-gray-900">{{ $pressure['label'] }}</dt>
             <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $pressure['value'] }} hPa</dd>
