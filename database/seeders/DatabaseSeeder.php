@@ -33,72 +33,72 @@ class DatabaseSeeder extends Seeder
             'name' => 'Andy\'s Board',
             'tiles' => [
                 [
-                  "data" => [
-                    "type" => "blade",
-                    "width" => 1,
-                    "height" => 1,
-                    "timezone" => "America/Chicago",
-                  ],
-                  "type" => "clock-analog",
-                ],
-                [
-                  "data" => [
-                    "type" => "blade",
-                    "width" => 1,
-                    "height" => 1,
-                    "timezone" => "America/Chicago",
-                  ],
-                  "type" => "clock-digital",
-                ],
-                [
-                  "data" => [
-                    "lat" => 41.6009,
-                    "lon" => -88.1994,
-                    "zip" => "60544",
-                    "name" => "Plainfield",
-                    "type" => "livewire",
-                    "width" => 1,
-                    "height" => 1,
-                    "country" => "US",
-                  ],
-                  "type" => "weather",
-                ],
-                [
-                  "data" => [
-                    "type" => "livewire",
-                    "width" => 1,
-                    "height" => 1,
-                    "timezone" => "America/Chicago",
-                  ],
-                  "type" => "monthly-calendar",
-                ],
-                [
-                  "data" => [
-                    "lat" => 41.6009,
-                    "lon" => -88.1994,
-                    "zip" => "60544",
-                    "name" => "Plainfield",
-                    "type" => "livewire",
-                    "width" => 1,
-                    "height" => 1,
-                    "country" => "US",
-                    "timezone" => "America/Chicago",
-                  ],
-                  "type" => "barometric",
-                ],
-                [
-                  "data" => [
-                    "name" => "Andy",
-                    "type" => "livewire",
-                    "width" => 1,
-                    "emails" => [
-                      "andy.newhouse@tighten.co",
-                      "andymnewhouse@gmail.com",
-                      "andy@sgdinstitute.org",
+                    'data' => [
+                        'type' => 'blade',
+                        'width' => 1,
+                        'height' => 1,
+                        'timezone' => 'America/Chicago',
                     ],
-                    "height" => 1,
-                  ],
-                  "type" => "agenda-calendar",
+                    'type' => 'clock-analog',
+                ],
+                [
+                    'data' => [
+                        'type' => 'blade',
+                        'width' => 1,
+                        'height' => 1,
+                        'timezone' => 'America/Chicago',
+                    ],
+                    'type' => 'clock-digital',
+                ],
+                [
+                    'data' => [
+                        'lat' => 41.6009,
+                        'lon' => -88.1994,
+                        'zip' => '60544',
+                        'name' => 'Plainfield',
+                        'type' => 'livewire',
+                        'width' => 1,
+                        'height' => 1,
+                        'country' => 'US',
+                    ],
+                    'type' => 'weather',
+                ],
+                [
+                    'data' => [
+                        'type' => 'livewire',
+                        'width' => 1,
+                        'height' => 1,
+                        'timezone' => 'America/Chicago',
+                    ],
+                    'type' => 'monthly-calendar',
+                ],
+                [
+                    'data' => [
+                        'lat' => 41.6009,
+                        'lon' => -88.1994,
+                        'zip' => '60544',
+                        'name' => 'Plainfield',
+                        'type' => 'livewire',
+                        'width' => 1,
+                        'height' => 1,
+                        'country' => 'US',
+                        'timezone' => 'America/Chicago',
+                    ],
+                    'type' => 'barometric',
+                ],
+                [
+                    'data' => [
+                        'name' => 'Andy',
+                        'type' => 'livewire',
+                        'width' => 1,
+                        'emails' => [
+                            'andy.newhouse@tighten.co',
+                            'andymnewhouse@gmail.com',
+                            'andy@sgdinstitute.org',
+                        ],
+                        'height' => 1,
+                    ],
+                    'type' => 'agenda-calendar',
                 ],
             ],
         ]);

@@ -23,7 +23,7 @@ new class extends Component {
     <div class="flex-auto text-sm font-semibold">{{ $data['name'] }}</div>
 
     <ul class="divide-y-2 mt-6 max-h-80 overflow-scroll">
-        @foreach($events as $event)
+        @foreach ($events as $event)
             <li class="py-1 first:pt-0">
                 <div class="text-sm">
                     {{ $event['name'] }}

@@ -35,8 +35,7 @@ class FetchCalendarEventsCommand extends Command
 
         foreach ($calendarIds as $calendarId) {
             $events = collect(Event::get(null, null, [], $calendarId))
-                ->filter(fn ($event) =>
-                    ! Carbon::createFromFormat('Y-m-d H:i:s', $event->getSortDate())->isPast())
+                ->filter(fn ($event) => ! Carbon::createFromFormat('Y-m-d H:i:s', $event->getSortDate())->isPast())
                 ->map(function (Event $event) {
                     $start = Carbon::parse($event->start->dateTime ?? $event->start->date);
                     $end = Carbon::parse($event->end->dateTime ?? $event->end->date);
@@ -67,7 +66,7 @@ class FetchCalendarEventsCommand extends Command
         }
 
         if ($start->diffInMinutes($end) > 5) {
-            return $start->format('D, M jS g:i a'). ' (' . $start->diffForHumans($end, CarbonInterface::DIFF_ABSOLUTE, true) . ')';
+            return $start->format('D, M jS g:i a') . ' (' . $start->diffForHumans($end, CarbonInterface::DIFF_ABSOLUTE, true) . ')';
         }
 
         return $start->format('D, M jS g:i a');
