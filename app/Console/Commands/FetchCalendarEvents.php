@@ -10,7 +10,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Spatie\GoogleCalendar\Event;
 
-class FetchCalendarEventsCommand extends Command
+class FetchCalendarEvents extends Command
 {
     protected $signature = 'board:fetch-calendar-events';
 
