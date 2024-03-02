@@ -19,13 +19,13 @@ new class extends Component {
     }
 }; ?>
 
-<x-tile :width="$data['width']" :height="$data['height']">
+<x-tile class="overflow-hidden" :width="$data['width']" :height="$data['height']">
     <div class="flex-auto text-sm font-semibold">{{ $data['name'] }}</div>
 
-    <ul class="divide-y-2 mt-6 max-h-80 overflow-scroll">
+    <ul class="divide-y divide-gray-200 dark:divide-gray-700 mt-3 overflow-scroll" style="height: calc({{ $data['height'] }} * var(--bento-row-height) - 45px)">
         @foreach ($events as $event)
             <li class="py-1 first:pt-0">
-                <div class="text-sm">
+                <div class="text-sm dark:text-gray-200">
                     {{ $event['name'] }}
                 </div>
                 <div class="text-sm">

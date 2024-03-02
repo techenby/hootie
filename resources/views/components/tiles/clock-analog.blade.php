@@ -1,12 +1,12 @@
 <x-tile class="flex items-center justify-center" :width="$data['width']" :height="$data['height']">
-    <div class="clock">
-        <div class="outer-clock-face">
+    <div class="clock border-4 border-gray-300 dark:border-gray-700">
+        <div class="outer-clock-face bg-white dark:bg-gray-800">
             <div class="marking marking-one"></div>
             <div class="marking marking-two"></div>
             <div class="marking marking-three"></div>
             <div class="marking marking-four"></div>
         </div>
-        <div class="inner-clock-face">
+        <div class="inner-clock-face bg-white dark:bg-gray-800">
             <div class="hand hour-hand"></div>
             <div class="hand min-hand"></div>
             <div class="hand second-hand"></div>

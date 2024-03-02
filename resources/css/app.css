@@ -5,13 +5,11 @@
 
 .clock {
     @apply aspect-square h-4/5 relative p-2 rounded-full;
-    border: 4px solid theme('colors.gray.300');
     margin: 50px auto;
 }
 
 .outer-clock-face {
     position: relative;
-    background: theme('colors.white');
     overflow: hidden;
     width: 100%;
     height: 100%;
@@ -71,7 +69,6 @@
     left: 10%;
     width: 80%;
     height: 80%;
-    background: theme('colors.white');
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
     border-radius: 100%;

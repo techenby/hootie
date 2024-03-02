@@ -2,6 +2,7 @@
 
 use App\Http\Integrations\OpenWeather\OpenWeatherConnector;
 use App\Http\Integrations\OpenWeather\Requests\OneCallRequest;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Volt\Component;
 
 new class extends Component {
@@ -13,36 +14,36 @@ new class extends Component {
         $request = new OneCallRequest($this->data['lat'], $this->data['lon']);
 
         return [
-            'weather' => $weather->send($request)->json(),
+            'weather' => Cache::remember('weather', 60*60, fn () => $weather->send($request)->json()),
         ];
     }
 }; ?>
 
 <x-tile :width="$data['width']" :height="$data['height']">
-    <div class="w-full mt-2 flex justify-between">
-        <p>{{ $data['name'] }}</p>
-        <x-weather-icon :id="$weather['current']['weather'][0]['id']" />
+    <div class="w-full flex items-start justify-between">
+        <p class="text-sm font-semibold">{{ $data['name'] }}</p>
+        <x-weather-icon class="size-6 dark:text-gray-200" :id="$weather['current']['weather'][0]['id']" />
     </div>
 
-    <div class="w-full mt-2 flex justify-between">
-        <div class="text-5xl">{{ round($weather['current']['temp']) }}°</div>
-        <div>
-            <p class="text-right">H: {{ round($weather['daily'][0]['temp']['max']) }}°</p>
-            <p class="text-right">L: {{ round($weather['daily'][0]['temp']['min']) }}°</p>
+    <div class="w-full mt-2 flex items-end justify-between">
+        <div class="text-4xl dark:text-gray-200">{{ round($weather['current']['temp']) }}°</div>
+        <div class="flex">
+            <p class="text-gray-500 dark:text-gray-400">{{ round($weather['daily'][0]['temp']['min']) }}</p>
+            <p class="w-9 text-right dark:text-gray-200">{{ round($weather['daily'][0]['temp']['max']) }}°</p>
         </div>
     </div>
 
-    <div class="space-y-2 mt-4">
+    <div class="space-y-2 mt-2">
         @foreach ($weather['daily'] as $index => $day)
         @if ($index > 0 && $index < 5)
-        <div class="w-full flex justify-between">
+        <div class="w-full flex justify-between text-sm">
             <div class="flex">
                 <p class="w-12">{{ Carbon\Carbon::parse($day['dt'], $weather['timezone'])->format('D') }}</p>
-                <x-weather-icon :id="$day['weather'][0]['id']" />
+                <x-weather-icon class="size-5" :id="$day['weather'][0]['id']" />
             </div>
             <div class="flex">
-                <p class="text-gray-700">{{ round($day['temp']['min']) }}</p>
-                <p class="w-9 text-right">{{ round($day['temp']['max']) }}°</p>
+                <p class="text-gray-500 dark:text-gray-400">{{ round($day['temp']['min']) }}</p>
+                <p class="w-9 text-right dark:text-gray-200">{{ round($day['temp']['max']) }}°</p>
             </div>
         </div>
         @endif
