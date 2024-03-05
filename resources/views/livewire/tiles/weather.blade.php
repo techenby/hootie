@@ -2,6 +2,7 @@
 
 use App\Http\Integrations\OpenWeather\OpenWeatherConnector;
 use App\Http\Integrations\OpenWeather\Requests\OneCallRequest;
+use App\Models\Tile;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Volt\Component;
 
@@ -10,11 +11,8 @@ new class extends Component {
 
     public function with(): array
     {
-        $weather = new OpenWeatherConnector(config("services.openweather.key"));
-        $request = new OneCallRequest($this->data['lat'], $this->data['lon']);
-
         return [
-            'weather' => Cache::remember('weather', 60*60, fn () => $weather->send($request)->json()),
+            'weather' => Tile::whereType('weather')->whereName($this->data['zip'])->get()->pluck('data')[0],
         ];
     }
 }; ?>
