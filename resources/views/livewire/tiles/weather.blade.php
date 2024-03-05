@@ -14,6 +14,7 @@ new class extends Component {
         return [
             'weather' => Tile::whereType('weather')->whereName($this->data['zip'])->first()->data,
             'component' => match($this->data['width'] . 'x' . $this->data['height']) {
+                '1x2' => 'tiles.weather-1x2',
                 '2x1' => 'tiles.weather-2x1',
                 default => 'tiles.weather-1x1',
             },
