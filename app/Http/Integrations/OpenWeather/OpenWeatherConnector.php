@@ -10,8 +10,11 @@ class OpenWeatherConnector extends Connector
 {
     use AcceptsJson;
 
-    public function __construct(public readonly string $token)
+    public function __construct(public ?string $token = null)
     {
+        if ($token === null) {
+            $this->token = config("services.openweather.key");
+        }
     }
 
     public function resolveBaseUrl(): string
