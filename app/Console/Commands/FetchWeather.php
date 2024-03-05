@@ -7,11 +7,8 @@ use App\Http\Integrations\OpenWeather\Requests\OneCallRequest;
 use App\Models\Board;
 use App\Models\Tile;
 use Carbon\CarbonInterface;
-use DateTime;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Carbon;
-use Spatie\GoogleCalendar\Event;
 
 class FetchWeather extends Command
 {
@@ -23,15 +20,15 @@ class FetchWeather extends Command
     {
         $this->info('Fetching weather...');
 
-        $coordinates = Board::where("tiles", "LIKE", "%weather%")
+        $coordinates = Board::where('tiles', 'LIKE', '%weather%')
             ->get()
-            ->pluck("tiles")
+            ->pluck('tiles')
             ->map(
-                fn($tiles) => collect($tiles)
-                ->filter(fn($tile) => $tile["type"] === "weather")
-                ->pluck("data")
-                ->map(fn($tile) => Arr::only($tile, ["lat", "lon", 'zip']))
-                ->unique()
+                fn ($tiles) => collect($tiles)
+                    ->filter(fn ($tile) => $tile['type'] === 'weather')
+                    ->pluck('data')
+                    ->map(fn ($tile) => Arr::only($tile, ['lat', 'lon', 'zip']))
+                    ->unique()
             )
             ->flatten(1)
             ->unique();

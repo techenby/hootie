@@ -15,7 +15,7 @@
     </div>
 
     <div class="grid grid-cols-7 gap-4 mt-2">
-        @foreach($weather['daily'] as $index => $day)
+        @foreach ($weather['daily'] as $index => $day)
         @if ($index > 0)
         <div class="w-full flex flex-col items-center justify-between space-y-2">
             <p>{{ Carbon\Carbon::parse($day['dt'], $weather['timezone'])->format('D') }}</p>

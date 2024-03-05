@@ -13,7 +13,7 @@ class OpenWeatherConnector extends Connector
     public function __construct(public ?string $token = null)
     {
         if ($token === null) {
-            $this->token = config("services.openweather.key");
+            $this->token = config('services.openweather.key');
         }
     }
 

@@ -26,7 +26,7 @@ it('can fetch weather', function () {
                 ],
                 'type' => 'weather',
             ],
-        ]
+        ],
     ]);
 
     $this->artisan('board:fetch-weather')->assertSuccessful();
