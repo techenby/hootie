@@ -1,20 +1,17 @@
 <?php
 
-use App\Filament\Resources\PointResource;
-use App\Filament\Resources\PointResource\Pages\CreatePoint;
-use App\Filament\Resources\PointResource\Pages\EditPoint;
-use App\Filament\Widgets\DeltaStats;
+use App\Http\Integrations\OpenWeather\Requests\OneCallRequest;
 use App\Models\Board;
-use App\Models\Point;
-use App\Models\User;
-use Illuminate\Support\Facades\Http;
-
-use function Pest\Laravel\{actingAs};
-use function Pest\Livewire\livewire;
-use function PHPUnit\Framework\assertEquals;
+use App\Models\Tile;
+use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 
 it('can fetch weather', function () {
-    $board = Board::factory()->create([
+    MockClient::global([
+        OneCallRequest::class => MockResponse::fixture('onecall'),
+    ]);
+
+    Board::factory()->create([
         'tiles' => [
             [
                 'data' => [
@@ -32,7 +29,12 @@ it('can fetch weather', function () {
         ]
     ]);
 
-    actingAs($user)
-        ->get(PointResource::getUrl('index'))
-        ->assertStatus(200);
+    $this->artisan('board:fetch-weather')->assertSuccessful();
+
+    $tile = Tile::whereType('weather')->whereName('60544')->first();
+
+    expect($tile)->not->toBe(null);
+    expect($tile->data['lat'])->toBe(41.6009);
+    expect($tile->data['lon'])->toBe(-88.1994);
+    expect($tile->data)->toHaveKeys(['current', 'daily']);
 });

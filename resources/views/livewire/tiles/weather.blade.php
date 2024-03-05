@@ -12,7 +12,7 @@ new class extends Component {
     public function with(): array
     {
         return [
-            'weather' => Tile::whereType('weather')->whereName($this->data['zip'])->get()->pluck('data')[0],
+            'weather' => Tile::whereType('weather')->whereName($this->data['zip'])->first()->data,
         ];
     }
 }; ?>
