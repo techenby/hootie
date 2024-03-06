@@ -59,7 +59,13 @@ class BoardResource extends Resource
                         Block::make('clock-analog')
                             ->columns(2)
                             ->icon('heroicon-m-clock')
-                            ->label('Analog Clock')
+                            ->label(function (?array $state): string {
+                                if ($state === null) {
+                                    return 'Analog Clock';
+                                }
+
+                                return 'Analog Clock (' . $state['timezone'] . ')';
+                            })
                             ->schema([
                                 Timezone::make('timezone')
                                     ->searchable()
@@ -70,7 +76,13 @@ class BoardResource extends Resource
                         Block::make('clock-digital')
                             ->columns(2)
                             ->icon('heroicon-m-clock')
-                            ->label('Digital Clock')
+                            ->label(function (?array $state): string {
+                                if ($state === null) {
+                                    return 'Digital Clock';
+                                }
+
+                                return 'Digital Clock (' . $state['timezone'] . ')';
+                            })
                             ->schema([
                                 Timezone::make('timezone')
                                     ->searchable()
@@ -81,7 +93,13 @@ class BoardResource extends Resource
                         Block::make('weather')
                             ->columns(2)
                             ->icon('heroicon-m-cloud')
-                            ->label('Weather')
+                            ->label(function (?array $state): string {
+                                if ($state === null) {
+                                    return 'Weather';
+                                }
+
+                                return 'Weather (' . $state['zip'] . ')';
+                            })
                             ->schema([
                                 TextInput::make('zip'),
                                 self::getSizeFieldset(),
@@ -90,7 +108,13 @@ class BoardResource extends Resource
                         Block::make('barometric')
                             ->columns(2)
                             ->icon('heroicon-m-cloud')
-                            ->label('Barometric Pressure')
+                            ->label(function (?array $state): string {
+                                if ($state === null) {
+                                    return 'Barometric Pressure';
+                                }
+
+                                return 'Barometric Pressure (' . $state['timezone'] . ')';
+                            })
                             ->schema([
                                 TextInput::make('zip'),
                                 Timezone::make('timezone')
@@ -101,7 +125,13 @@ class BoardResource extends Resource
                         Block::make('monthly-calendar')
                             ->columns(2)
                             ->icon('heroicon-m-calendar')
-                            ->label('Monthly Calendar')
+                            ->label(function (?array $state): string {
+                                if ($state === null) {
+                                    return 'Monthly Calendar';
+                                }
+
+                                return 'Monthly Calendar (' . $state['timezone'] . ')';
+                            })
                             ->schema([
                                 Timezone::make('timezone')
                                     ->searchable()
@@ -112,7 +142,13 @@ class BoardResource extends Resource
                         Block::make('agenda-calendar')
                             ->columns(2)
                             ->icon('heroicon-m-calendar')
-                            ->label('Agenda Calendar')
+                            ->label(function (?array $state): string {
+                                if ($state === null) {
+                                    return 'Agenda Calendar';
+                                }
+
+                                return 'Agenda Calendar (' . $state['name'] . ')';
+                            })
                             ->schema([
                                 TextInput::make('name')
                                     ->required(),
