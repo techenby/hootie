@@ -9,14 +9,21 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "blade-ui-kit/blade-heroicons": "^2.3",
         "filament/filament": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/folio": "^1.1",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "livewire/volt": "^1.6",
+        "omar-haris/filament-timezone-field": "^1.0",
+        "saloonphp/laravel-plugin": "^3.0",
+        "saloonphp/saloon": "^3.0",
         "simplesoftwareio/simple-qrcode": "^4.2",
-        "solution-forest/filament-simplelightbox": "^0.0.4"
+        "solution-forest/filament-simplelightbox": "^0.0.4",
+        "spatie/laravel-dashboard": "^3.0",
+        "spatie/laravel-google-calendar": "^3.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

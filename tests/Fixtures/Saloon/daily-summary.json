@@ -1,0 +1,15 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Server": "openresty",
+        "Date": "Thu, 07 Mar 2024 01:33:46 GMT",
+        "Content-Type": "application\/json",
+        "Content-Length": "366",
+        "Connection": "keep-alive",
+        "X-Cache-Key": "\/data\/3.0\/onecall\/day_summary?date=2024-03-04&lat=41.6&lon=-88.2",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Methods": "GET, POST"
+    },
+    "data": "{\"lat\":41.6009,\"lon\":-88.1994,\"tz\":\"-06:00\",\"date\":\"2024-03-04\",\"units\":\"standard\",\"cloud_cover\":{\"afternoon\":0.0},\"humidity\":{\"afternoon\":76.0},\"precipitation\":{\"total\":0.0},\"temperature\":{\"min\":283.85,\"max\":295.43,\"afternoon\":288.47,\"night\":292.02,\"evening\":283.88,\"morning\":292.64},\"pressure\":{\"afternoon\":1011.0},\"wind\":{\"max\":{\"speed\":13.38,\"direction\":160.0}}}"
+}

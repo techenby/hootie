@@ -11,6 +11,7 @@ use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
+use Illuminate\Contracts\View\View;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -62,12 +63,7 @@ class AppPanelProvider extends PanelProvider
             ->plugin(SimpleLightBoxPlugin::make())
             ->renderHook(
                 'panels::head.start',
-                fn (): string => '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-                    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-                    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-                    <link rel="manifest" href="/site.webmanifest">
-                    <meta name="msapplication-TileColor" content="#2b5797">
-                    <meta name="theme-color" content="#ffffff">',
+                fn (): View => view('components.favicon'),
             );
     }
 }
