@@ -94,7 +94,7 @@ class BoardResource extends Resource
                             ->columns(2)
                             ->icon('heroicon-m-cloud')
                             ->label(function (?array $state): string {
-                                if ($state === null) {
+                                if (empty($state)) {
                                     return 'Weather';
                                 }
 
@@ -109,11 +109,11 @@ class BoardResource extends Resource
                             ->columns(2)
                             ->icon('heroicon-m-cloud')
                             ->label(function (?array $state): string {
-                                if ($state === null) {
+                                if (empty($state)) {
                                     return 'Barometric Pressure';
                                 }
 
-                                return 'Barometric Pressure (' . $state['timezone'] . ')';
+                                return 'Barometric Pressure (' . $state['zip'] . ')';
                             })
                             ->schema([
                                 TextInput::make('zip'),
