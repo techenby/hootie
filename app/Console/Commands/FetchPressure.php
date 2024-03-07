@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Http\Integrations\OpenWeather\OpenWeatherConnector;
 use App\Http\Integrations\OpenWeather\Requests\DailySummaryRequest;
-use App\Http\Integrations\OpenWeather\Requests\OneCallRequest;
 use App\Models\Board;
 use App\Models\Tile;
 use Carbon\CarbonInterface;

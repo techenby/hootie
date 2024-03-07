@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Integrations\OpenWeather\Requests\DailySummaryRequest;
-use App\Http\Integrations\OpenWeather\Requests\OneCallRequest;
 use App\Models\Board;
 use App\Models\Tile;
 use Saloon\Http\Faking\MockClient;
