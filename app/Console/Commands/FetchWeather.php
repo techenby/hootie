@@ -14,7 +14,7 @@ class FetchWeather extends Command
 {
     protected $signature = 'board:fetch-weather';
 
-    protected $description = 'Fetch events from Open Weather';
+    protected $description = 'Fetch weather from Open Weather';
 
     public function handle()
     {

@@ -84,7 +84,7 @@ class DatabaseSeeder extends Seeder
                         'country' => 'US',
                         'timezone' => 'America/Chicago',
                     ],
-                    'type' => 'barometric',
+                    'type' => 'pressure',
                 ],
                 [
                     'data' => [

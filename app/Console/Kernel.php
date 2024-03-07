@@ -10,6 +10,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('board:fetch-calendar-events')->everyMinute();
+        $schedule->command('board:fetch-weather')->everyFifteenMinutes();
+        $schedule->command('board:fetch-pressure')->everyFifteenMinutes();
     }
 
     protected function commands(): void

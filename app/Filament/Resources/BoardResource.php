@@ -41,7 +41,7 @@ class BoardResource extends Resource
                     ->cloneable()
                     ->dehydrateStateUsing(function (array $state) {
                         foreach ($state as $index => $tile) {
-                            if ($tile['type'] === 'weather' || $tile['type'] === 'barometric') {
+                            if ($tile['type'] === 'weather' || $tile['type'] === 'pressure') {
                                 $weather = new OpenWeatherConnector(config('services.openweather.key'));
                                 $request = new ZipRequest($tile['data']['zip']);
 
@@ -105,7 +105,7 @@ class BoardResource extends Resource
                                 self::getSizeFieldset(),
                                 self::getTypeField('livewire'),
                             ]),
-                        Block::make('barometric')
+                        Block::make('pressure')
                             ->columns(2)
                             ->icon('heroicon-m-cloud')
                             ->label(function (?array $state): string {

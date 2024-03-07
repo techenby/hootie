@@ -76,7 +76,7 @@ it('adding a pressure tile looks up lat/long', function () {
         ->fillForm([
             'tiles' => [
                 [
-                    'type' => 'barometric',
+                    'type' => 'pressure',
                     'data' => [
                         'zip' => 60544,
                         'timezone' => 'America/Chicago',
