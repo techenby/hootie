@@ -32,7 +32,11 @@ class BoardResource extends Resource
         return $form
             ->columns(1)
             ->schema([
-                TextInput::make('name'),
+                TextInput::make('name')
+                    ->required(),
+                TextInput::make('token')
+                    ->helperText('String to secure your board\'s public link. Use lowercase letters, and use dashes instead of spaces.')
+                    ->required(),
                 Builder::make('tiles')
                     ->addActionLabel('Add a new tile')
                     ->blockNumbers(false)
@@ -158,7 +162,7 @@ class BoardResource extends Resource
                                             ->email()
                                             ->required(),
                                     )
-                                    ->helperText('Share your calendar with `newhouse-dashboard@home-dashboard-169916.iam.gserviceaccount.com`'),
+                                    ->helperText('Share your calendar with `hootie@home-dashboard-169916.iam.gserviceaccount.com`'),
                                 self::getSizeFieldset(),
                                 self::getTypeField('livewire'),
                             ]),

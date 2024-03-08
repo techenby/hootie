@@ -17,7 +17,7 @@ class EditBoard extends EditRecord
     {
         return [
             Action::make('preview')
-                ->url(url('boards/' . $this->getRecord()->id), shouldOpenInNewTab: true),
+                ->url(url('boards/' . $this->getRecord()->id . '?token=' . $this->getRecord()->token), shouldOpenInNewTab: true),
             DeleteAction::make(),
         ];
     }

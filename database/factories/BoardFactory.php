@@ -13,6 +13,8 @@ class BoardFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'token' => 'hootie',
+            'tiles' => [],
         ];
     }
 }
