@@ -14,7 +14,7 @@ it('can be viewed', function () {
                 ],
                 'type' => 'clock-analog',
             ],
-        ]
+        ],
     ]);
 
     $this->get(route('boards.show', ['board' => $board, 'token' => $board->token]))
@@ -31,7 +31,7 @@ it('cannot be viewed without token', function () {
 
 it('cannot be viewed if token does not match', function () {
     $board = Board::factory()->create([
-        'token' => 'hootie'
+        'token' => 'hootie',
     ]);
 
     $this->get(route('boards.show', ['board' => $board, 'token' => 'king']))
