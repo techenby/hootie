@@ -178,6 +178,14 @@ class BoardResource extends Resource
                                 self::getSizeFieldset(),
                                 self::getTypeField('blade'),
                             ]),
+                        Block::make('debug')
+                            ->columns(2)
+                            ->icon('heroicon-m-bug-ant')
+                            ->label('Debug')
+                            ->schema([
+                                self::getSizeFieldset(),
+                                self::getTypeField('blade'),
+                            ]),
                     ]),
             ]);
     }
