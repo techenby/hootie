@@ -4,6 +4,7 @@ use App\Models\Board;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use function Laravel\Folio\name;
 use function Laravel\Folio\render;
@@ -12,7 +13,7 @@ name('boards.show');
 
 render(function (View $view, Board $board) {
     if (! request()->has('token') || request()->get('token') !== $board->token) {
-        return response('Not Found', 404);
+        throw new NotFoundHttpException();
     }
 
     return $view;
