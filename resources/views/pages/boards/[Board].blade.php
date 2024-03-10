@@ -1,8 +1,6 @@
 <?php
 
 use App\Models\Board;
-use App\Models\Post;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -33,11 +31,18 @@ render(function (View $view, Board $board) {
 </div>
 
 <script type="module">
-	import BentoGrid from "https://cdn.jsdelivr.net/npm/@bentogrid/core@1.1.1/BentoGrid.min.js";
+	import BentoGrid from "https://cdn.jsdelivr.net/npm/@bentogrid/core@1.1.1/BentoGrid.min.js"
 
     const myBento = new BentoGrid({
         cellGap: 4,
         minCellWidth: 200,
-    });
+        @if (isset($board->settings['columns']))
+        columns: {{ $board->settings['columns'] }},
+        @endif
+    })
+
+    @if (isset($board->settings['theme']) && $board->settings['theme'] === 'dark')
+    document.documentElement.classList.add('dark')
+    @endif
 </script>
 </x-layouts.app>
