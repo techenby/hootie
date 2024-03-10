@@ -13,5 +13,6 @@ class Board extends Model
 
     protected $casts = [
         'tiles' => 'array',
+        'settings' => 'array',
     ];
 }
