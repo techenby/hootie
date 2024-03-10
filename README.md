@@ -6,3 +6,4 @@ Hootie is a magical house demon from one of my favorite shows. In the show, Hoot
 
 - Basic Inventory Management
 - Tracker to determine if my spouse will experience pain
+- Custom Dashboards
