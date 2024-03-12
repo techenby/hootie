@@ -10,11 +10,14 @@ class Thing extends Model
 {
     use HasFactory;
 
-    protected $casts = [
-        'categories' => 'array',
-    ];
-
     protected $guarded = [];
+
+    protected function casts(): array
+    {
+        return [
+            'categories' => 'array',
+        ];
+    }
 
     public function bin(): BelongsTo
     {
