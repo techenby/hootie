@@ -69,7 +69,7 @@ class BoardResource extends Resource
                                     return 'Analog Clock';
                                 }
 
-                                return 'Analog Clock (' . $state['timezone'] . ')';
+                                return 'Analog Clock ('.$state['timezone'].')';
                             })
                             ->schema([
                                 Timezone::make('timezone')
@@ -86,7 +86,7 @@ class BoardResource extends Resource
                                     return 'Digital Clock';
                                 }
 
-                                return 'Digital Clock (' . $state['timezone'] . ')';
+                                return 'Digital Clock ('.$state['timezone'].')';
                             })
                             ->schema([
                                 Timezone::make('timezone')
@@ -103,7 +103,7 @@ class BoardResource extends Resource
                                     return 'Weather';
                                 }
 
-                                return 'Weather (' . $state['zip'] . ')';
+                                return 'Weather ('.$state['zip'].')';
                             })
                             ->schema([
                                 TextInput::make('zip'),
@@ -118,7 +118,7 @@ class BoardResource extends Resource
                                     return 'Barometric Pressure';
                                 }
 
-                                return 'Barometric Pressure (' . $state['zip'] . ')';
+                                return 'Barometric Pressure ('.$state['zip'].')';
                             })
                             ->schema([
                                 TextInput::make('zip'),
@@ -135,7 +135,7 @@ class BoardResource extends Resource
                                     return 'Monthly Calendar';
                                 }
 
-                                return 'Monthly Calendar (' . $state['timezone'] . ')';
+                                return 'Monthly Calendar ('.$state['timezone'].')';
                             })
                             ->schema([
                                 Timezone::make('timezone')
@@ -152,7 +152,7 @@ class BoardResource extends Resource
                                     return 'Agenda Calendar';
                                 }
 
-                                return 'Agenda Calendar (' . $state['name'] . ')';
+                                return 'Agenda Calendar ('.$state['name'].')';
                             })
                             ->schema([
                                 TextInput::make('name')

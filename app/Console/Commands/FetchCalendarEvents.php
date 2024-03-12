@@ -16,7 +16,7 @@ class FetchCalendarEvents extends Command
 
     protected $description = 'Fetch events from a Google Calendar';
 
-    public function handle()
+    public function handle(): void
     {
         $this->info('Fetching calendar events...');
 
@@ -66,7 +66,7 @@ class FetchCalendarEvents extends Command
         }
 
         if ($start->diffInMinutes($end) > 5) {
-            return $start->format('D, M jS g:i a') . ' (' . $start->diffForHumans($end, CarbonInterface::DIFF_ABSOLUTE, true) . ')';
+            return $start->format('D, M jS g:i a').' ('.$start->diffForHumans($end, CarbonInterface::DIFF_ABSOLUTE, true).')';
         }
 
         return $start->format('D, M jS g:i a');

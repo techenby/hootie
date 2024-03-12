@@ -2,18 +2,12 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
-
-/*
-|--------------------------------------------------------------------------
-| Console Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of your Closure based console
-| commands. Each Closure is bound to a command instance allowing a
-| simple approach to interacting with each command's IO methods.
-|
-*/
+use Illuminate\Support\Facades\Schedule;
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+})->purpose('Display an inspiring quote')->hourly();
+
+Schedule::command('board:fetch-calendar-events')->everyMinute();
+Schedule::command('board:fetch-weather')->everyFifteenMinutes();
+Schedule::command('board:fetch-pressure')->everyFifteenMinutes();

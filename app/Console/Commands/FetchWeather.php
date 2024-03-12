@@ -16,7 +16,7 @@ class FetchWeather extends Command
 
     protected $description = 'Fetch weather from Open Weather';
 
-    public function handle()
+    public function handle(): void
     {
         $this->info('Fetching weather...');
 
@@ -55,7 +55,7 @@ class FetchWeather extends Command
         }
 
         if ($start->diffInMinutes($end) > 5) {
-            return $start->format('D, M jS g:i a') . ' (' . $start->diffForHumans($end, CarbonInterface::DIFF_ABSOLUTE, true) . ')';
+            return $start->format('D, M jS g:i a').' ('.$start->diffForHumans($end, CarbonInterface::DIFF_ABSOLUTE, true).')';
         }
 
         return $start->format('D, M jS g:i a');
