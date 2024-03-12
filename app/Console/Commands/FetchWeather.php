@@ -16,7 +16,7 @@ class FetchWeather extends Command
 
     protected $description = 'Fetch weather from Open Weather';
 
-    public function handle()
+    public function handle(): void
     {
         $this->info('Fetching weather...');
 
