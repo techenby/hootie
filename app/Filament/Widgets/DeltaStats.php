@@ -70,11 +70,11 @@ class DeltaStats extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Temperature Change', $this->todaysTemp . '°F')
-                ->description('from ' . $this->yesterdaysTemp . '°F, ' . abs($this->todaysTemp - $this->yesterdaysTemp) . '°F change')
+            Stat::make('Temperature Change', $this->todaysTemp.'°F')
+                ->description('from '.$this->yesterdaysTemp.'°F, '.abs($this->todaysTemp - $this->yesterdaysTemp).'°F change')
                 ->descriptionIcon(($this->todaysTemp > $this->yesterdaysTemp) ? 'heroicon-m-arrow-trending-up' : 'heroicon-m-arrow-trending-down'),
             Stat::make('Precipitation Change', $this->todaysWeather['main'])
-                ->description('from ' . $this->yesterdaysWeather['main']),
+                ->description('from '.$this->yesterdaysWeather['main']),
             Stat::make('Joint Pain', $this->jointPain ? 'Likely' : 'Not Likely'),
             Stat::make('Muscle Pain', $this->musclePain ? 'Likely' : 'Not Likely'),
         ];
