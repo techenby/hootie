@@ -55,7 +55,7 @@ class FetchWeather extends Command
         }
 
         if ($start->diffInMinutes($end) > 5) {
-            return $start->format('D, M jS g:i a').' ('.$start->diffForHumans($end, CarbonInterface::DIFF_ABSOLUTE, true).')';
+            return $start->format('D, M jS g:i a') . ' (' . $start->diffForHumans($end, CarbonInterface::DIFF_ABSOLUTE, true) . ')';
         }
 
         return $start->format('D, M jS g:i a');

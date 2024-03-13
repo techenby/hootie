@@ -12,13 +12,6 @@ class Thing extends Model
 
     protected $guarded = [];
 
-    protected function casts(): array
-    {
-        return [
-            'categories' => 'array',
-        ];
-    }
-
     public function bin(): BelongsTo
     {
         return $this->belongsTo(Bin::class);
@@ -27,5 +20,12 @@ class Thing extends Model
     public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'categories' => 'array',
+        ];
     }
 }

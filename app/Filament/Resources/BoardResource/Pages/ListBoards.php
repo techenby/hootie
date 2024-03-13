@@ -16,7 +16,7 @@ class ListBoards extends ListRecords
         return [
             Action::make('create')
                 ->action(function () {
-                    $name = str(auth()->user()->name)->before(' ')."'s Board";
+                    $name = str(auth()->user()->name)->before(' ') . "'s Board";
 
                     Board::create(['name' => $name]);
                 }),
