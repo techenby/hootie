@@ -14,14 +14,14 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/folio": "^1.1",
         "laravel/framework": "^11.0",
-        "laravel/sanctum": "dev-master",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "livewire/volt": "^1.6",
         "omar-haris/filament-timezone-field": "^1.0",
         "saloonphp/laravel-plugin": "^3.0",
         "saloonphp/saloon": "^3.0",
         "simplesoftwareio/simple-qrcode": "^4.2",
-        "solution-forest/filament-simplelightbox": "^0.0.4",
+        "solution-forest/filament-simplelightbox": "^0.0.6",
         "spatie/laravel-google-calendar": "^3.7"
     },
     "require-dev": {
