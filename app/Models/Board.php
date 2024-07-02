@@ -11,8 +11,11 @@ class Board extends Model
 
     protected $guarded = [];
 
-    protected $casts = [
-        'tiles' => 'array',
-        'settings' => 'array',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'tiles' => 'array',
+            'settings' => 'array',
+        ];
+    }
 }

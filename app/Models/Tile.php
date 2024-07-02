@@ -10,7 +10,10 @@ class Tile extends Model
 
     public $guarded = [];
 
-    public $casts = [
-        'data' => 'array',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'data' => 'array',
+        ];
+    }
 }

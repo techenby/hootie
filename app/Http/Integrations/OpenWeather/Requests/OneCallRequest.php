@@ -9,9 +9,7 @@ class OneCallRequest extends Request
 {
     protected Method $method = Method::GET;
 
-    public function __construct(public float $lat, public float $lon)
-    {
-    }
+    public function __construct(public float $lat, public float $lon) {}
 
     public function resolveEndpoint(): string
     {

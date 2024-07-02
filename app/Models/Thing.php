@@ -10,10 +10,6 @@ class Thing extends Model
 {
     use HasFactory;
 
-    protected $casts = [
-        'categories' => 'array',
-    ];
-
     protected $guarded = [];
 
     public function bin(): BelongsTo
@@ -24,5 +20,12 @@ class Thing extends Model
     public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'categories' => 'array',
+        ];
     }
 }

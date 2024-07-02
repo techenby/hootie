@@ -9,9 +9,7 @@ class ZipRequest extends Request
 {
     protected Method $method = Method::GET;
 
-    public function __construct(public string $zip)
-    {
-    }
+    public function __construct(public string $zip) {}
 
     public function resolveEndpoint(): string
     {
