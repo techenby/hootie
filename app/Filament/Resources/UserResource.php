@@ -16,6 +16,7 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
@@ -54,7 +55,10 @@ class UserResource extends Resource
                     ->searchable(),
                 TextColumn::make('email_verified_at')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('status')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -75,6 +79,14 @@ class UserResource extends Resource
                         $record->markEmailAsVerified();
                         Notification::make()->title('Marked user as verified.')->success()->send();
                     }),
+                Action::make('get_api_key')
+                    ->form([
+                        TextInput::make('api_key')
+                            ->default(function (Model $record): string {
+                                return $record->createToken('Status')->plainTextToken;
+                            }),
+                    ])
+                    ->label('Get API Key'),
                 Action::make('change_password')
                     ->action(function (array $data, User $record) {
                         $record->update(['password' => Hash::make($data['password'])]);
