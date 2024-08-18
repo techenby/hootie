@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\PointResource\Pages;
+namespace App\Filament\Clusters\Delta\Resources\PointResource\Pages;
 
-use App\Filament\Resources\PointResource;
+use App\Filament\Clusters\Delta\Resources\PointResource;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;

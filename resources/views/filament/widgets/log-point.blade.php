@@ -1,4 +1,4 @@
-@use('App\Filament\Resources\PointResource')
+@use('App\Filament\Clusters\Delta\Resources\PointResource')
 
 <x-filament-widgets::widget>
     <x-filament::section>

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\PointResource\Pages;
+namespace App\Filament\Clusters\Delta\Resources\PointResource\Pages;
 
-use App\Filament\Resources\PointResource;
+use App\Filament\Clusters\Delta\Resources\PointResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
