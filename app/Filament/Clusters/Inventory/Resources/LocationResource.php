@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Clusters\Inventory\Resources;
 
-use App\Filament\Resources\LocationResource\Pages\ManageLocations;
+use App\Filament\Clusters\Inventory;
+use App\Filament\Clusters\Inventory\Resources\LocationResource\Pages\ManageLocations;
 use App\Models\Location;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -18,7 +19,7 @@ class LocationResource extends Resource
 {
     protected static ?string $model = Location::class;
 
-    protected static ?string $navigationGroup = 'Inventory';
+    protected static ?string $cluster = Inventory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-map-pin';
 

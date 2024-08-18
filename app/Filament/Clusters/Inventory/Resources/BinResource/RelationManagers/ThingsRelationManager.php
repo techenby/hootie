@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\BinResource\RelationManagers;
+namespace App\Filament\Clusters\Inventory\Resources\BinResource\RelationManagers;
 
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\BinResource\Pages;
+namespace App\Filament\Clusters\Inventory\Resources\BinResource\Pages;
 
-use App\Filament\Resources\BinResource;
+use App\Filament\Clusters\Inventory\Resources\BinResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 

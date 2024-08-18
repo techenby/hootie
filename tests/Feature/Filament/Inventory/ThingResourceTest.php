@@ -1,6 +1,6 @@
 <?php
 
-use App\Filament\Resources\ThingResource;
+use App\Filament\Clusters\Inventory\Resources\ThingResource;
 use App\Models\User;
 
 use function Pest\Laravel\{actingAs};

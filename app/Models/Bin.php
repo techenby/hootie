@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Filament\Resources\BinResource;
+use App\Filament\Clusters\Inventory\Resources\BinResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
