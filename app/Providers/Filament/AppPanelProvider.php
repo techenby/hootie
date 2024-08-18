@@ -59,12 +59,13 @@ class AppPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->sidebarCollapsibleOnDesktop(true)
-            ->sidebarWidth('18em')
+            ->sidebarWidth('12em')
             ->profile()
             ->plugin(SimpleLightBoxPlugin::make())
             ->renderHook(
                 'panels::head.start',
                 fn (): View => view('components.favicon'),
-            );
+            )
+            ->viteTheme('resources/css/filament/app/theme.css');
     }
 }

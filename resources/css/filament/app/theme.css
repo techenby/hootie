@@ -1,0 +1,7 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+.fi-page-sub-navigation-sidebar {
+    @apply w-40;
+}
