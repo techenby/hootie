@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Clusters\Inventory\Resources;
 
-use App\Filament\Resources\ThingResource\Pages\ManageThings;
+use App\Filament\Clusters\Inventory;
+use App\Filament\Clusters\Inventory\Resources\ThingResource\Pages\ManageThings;
 use App\Models\Bin;
 use App\Models\Thing;
 use Filament\Forms\Components\FileUpload;
@@ -30,7 +31,7 @@ class ThingResource extends Resource
 {
     protected static ?string $model = Thing::class;
 
-    protected static ?string $navigationGroup = 'Inventory';
+    protected static ?string $cluster = Inventory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-puzzle-piece';
 

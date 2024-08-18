@@ -1,6 +1,6 @@
 <?php
 
-use App\Filament\Resources\BinResource;
+use App\Filament\Clusters\Inventory\Resources\BinResource;
 use App\Models\Bin;
 use App\Models\User;
 

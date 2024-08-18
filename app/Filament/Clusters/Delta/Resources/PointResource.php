@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Clusters\Delta\Resources;
 
-use App\Filament\Resources\PointResource\Pages\CreatePoint;
-use App\Filament\Resources\PointResource\Pages\EditPoint;
-use App\Filament\Resources\PointResource\Pages\ListPoints;
+use App\Filament\Clusters\Delta;
+use App\Filament\Clusters\Delta\Resources\PointResource\Pages\CreatePoint;
+use App\Filament\Clusters\Delta\Resources\PointResource\Pages\EditPoint;
+use App\Filament\Clusters\Delta\Resources\PointResource\Pages\ListPoints;
 use App\Models\Point;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
@@ -21,7 +22,7 @@ class PointResource extends Resource
 {
     protected static ?string $model = Point::class;
 
-    protected static ?string $navigationGroup = 'Delta';
+    protected static ?string $cluster = Delta::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Filament\Resources\LocationResource;
+use App\Filament\Clusters\Inventory\Resources\LocationResource;
 use App\Models\User;
 
 use function Pest\Laravel\{actingAs};

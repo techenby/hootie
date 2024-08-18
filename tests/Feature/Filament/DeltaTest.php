@@ -1,8 +1,8 @@
 <?php
 
-use App\Filament\Resources\PointResource;
-use App\Filament\Resources\PointResource\Pages\CreatePoint;
-use App\Filament\Resources\PointResource\Pages\EditPoint;
+use App\Filament\Clusters\Delta\Resources\PointResource;
+use App\Filament\Clusters\Delta\Resources\PointResource\Pages\CreatePoint;
+use App\Filament\Clusters\Delta\Resources\PointResource\Pages\EditPoint;
 use App\Filament\Widgets\DeltaStats;
 use App\Models\Point;
 use App\Models\User;

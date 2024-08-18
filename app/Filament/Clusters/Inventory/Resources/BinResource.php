@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Clusters\Inventory\Resources;
 
-use App\Filament\Resources\BinResource\Pages\ListBins;
-use App\Filament\Resources\BinResource\Pages\ViewBin;
-use App\Filament\Resources\BinResource\RelationManagers\ThingsRelationManager;
+use App\Filament\Clusters\Inventory;
+use App\Filament\Clusters\Inventory\Resources\BinResource\Pages\ListBins;
+use App\Filament\Clusters\Inventory\Resources\BinResource\Pages\ViewBin;
+use App\Filament\Clusters\Inventory\Resources\BinResource\RelationManagers\ThingsRelationManager;
 use App\Models\Bin;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
@@ -32,7 +33,7 @@ class BinResource extends Resource
 {
     protected static ?string $model = Bin::class;
 
-    protected static ?string $navigationGroup = 'Inventory';
+    protected static ?string $cluster = Inventory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-archive-box';
 

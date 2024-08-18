@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\ThingResource\Pages;
+namespace App\Filament\Clusters\Inventory\Resources\ThingResource\Pages;
 
-use App\Filament\Resources\ThingResource;
+use App\Filament\Clusters\Inventory\Resources\ThingResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ManageRecords;
 
