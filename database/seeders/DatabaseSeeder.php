@@ -4,9 +4,12 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Account;
 use App\Models\Board;
+use App\Models\Envelope;
 use App\Models\Location;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'hi@andymnewhouse.me',
         ]);
 
+        // Inventory
         Location::factory()->createMany([
             ['name' => 'Basement'],
             ['name' => 'Master Bedroom Closet'],
@@ -29,6 +33,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Garage'],
         ]);
 
+        // Boards
         Board::factory()->create([
             'name' => 'Andy\'s Board',
             'tiles' => [
@@ -102,5 +107,29 @@ class DatabaseSeeder extends Seeder
                 ],
             ],
         ]);
+
+        // Snails
+        Account::factory()->count(4)
+            ->state(new Sequence(
+                ['name' => 'Checking', 'institution' => 'Bank'],
+                ['name' => 'Savings', 'institution' => 'Bank', 'interest' => 1.5],
+            ))
+            ->create(['type' => 'asset']);
+        Account::factory()->count(3)
+            ->state(new Sequence(
+                ['name' => 'Travel Card', 'institution' => 'Airline', 'interest' => 25],
+                ['name' => 'Bank Card', 'institution' => 'Bank', 'interest' => 29],
+                ['name' => 'Loan', 'institution' => 'Bank', 'interest' => 5],
+            ))
+            ->create(['type' => 'liability']);
+
+        Envelope::factory()->count(3)
+            ->state(new Sequence(
+                ['name' => 'Groceries'],
+                ['name' => 'Utilities'],
+                ['name' => 'Rent'],
+                ['name' => 'Fun'],
+            ))
+            ->create();
     }
 }

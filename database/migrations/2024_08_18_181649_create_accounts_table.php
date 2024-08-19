@@ -8,19 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('envelopes', function (Blueprint $table) {
+        Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->integer('target')->nullable();
-            $table->string('target_by')->nullable();
-            $table->string('target_interval')->nullable();
+            $table->string('institution');
+            $table->string('type');
+            $table->double('interest')->nullable();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('envelopes');
+        Schema::dropIfExists('accounts');
     }
 };
