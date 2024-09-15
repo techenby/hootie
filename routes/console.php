@@ -17,6 +17,6 @@ Artisan::command('app:clear-status', function () {
     $twoHoursAgo = now()->subHours(2);
 
     User::whereNotNull('status')
-        ->where('updated_at', $twoHoursAgo)
+        ->where('updated_at', '<=', $twoHoursAgo)
         ->update(['status' => null]);
 })->purpose('Clear stale statuses')->hourly();

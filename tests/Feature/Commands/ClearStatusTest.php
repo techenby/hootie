@@ -13,6 +13,16 @@ it('clears status after two hours of inactivity', function () {
     expect($user->fresh()->status)->toBeNull();
 });
 
+it('clears status after more than two hours of inactivity', function () {
+    $user = User::factory()->create(['status' => 'pairing']);
+
+    Carbon::setTestNow(now()->addHours(2)->addMinute());
+
+    $this->artisan('app:clear-status');
+
+    expect($user->fresh()->status)->toBeNull();
+});
+
 it('does not clear status before two hours of inactivity', function () {
     $user = User::factory()->create(['status' => 'pairing']);
 
